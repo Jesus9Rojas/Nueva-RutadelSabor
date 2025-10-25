@@ -1,0 +1,6 @@
+[
+  { "id": "status_pending", "nombre": "Pendiente" },
+  { "id": "status_in_transit", "nombre": "En Camino" },
+  { "id": "status_delivered", "nombre": "Entregado" },
+  { "id": "status_cancelled", "nombre": "Cancelado" }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4d61" },
+    "rol": "Administrador"
+  },
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4d62" },
+    "rol": "Vendedor"
+  },
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4d63" },
+    "rol": "Repartidor"
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4db1" },
+    "id_cliente": { "$oid": "60c72b2f9b1e8b001c8e4d31" },
+    "id_comprobante": { "$oid": "60c72b2f9b1e8b001c8e4d51" },
+    "numero_comprobante": "B001-0000001",
+    "id_empleado": null,
+    "id_estado": { "$oid": "60c72b2f9b1e8b001c8e4d81" },
+    "fecha_pedido": { "$date": "2025-06-08T12:00:00Z" },
+    "id_entrega": { "$oid": "60c72b2f9b1e8b001c8e4d91" },
+    "subtotal": 35.00,
+    "monto_agregado": 5.00,
+    "total": 40.00,
+    "id_metodopago": { "$oid": "60c72b2f9b1e8b001c8e4da1" },
+    "numero_tarjeta": "************1234",
+    "fecha_vencimiento": { "$date": "2028-12-01T00:00:00Z" },
+    "titular": "Juan Perez",
+    "cvv": "123",
+    "numero_yape": null,
+    "codigo_yape": null,
+    "detalles": [
+      {
+        "id_producto": { "$oid": "60c72b2f9b1e8b001c8e4f01" },
+        "cantidad": 2,
+        "subtotal": 25.00
+      },
+      {
+        "id_producto": { "$oid": "60c72b2f9b1e8b001c8e4f08" },
+        "cantidad": 1,
+        "subtotal": 11.00
+      }
+    ]
+  },
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4db2" },
+    "id_cliente": { "$oid": "60c72b2f9b1e8b001c8e4d32" },
+    "id_comprobante": { "$oid": "60c72b2f9b1e8b001c8e4d52" },
+    "numero_comprobante": "F001-0000001",
+    "id_empleado": { "$oid": "60c72b2f9b1e8b001c8e4d71" },
+    "id_estado": { "$oid": "60c72b2f9b1e8b001c8e4d82" },
+    "fecha_pedido": { "$date": "2025-06-09T09:30:00Z" },
+    "id_entrega": { "$oid": "60c72b2f9b1e8b001c8e4d92" },
+    "subtotal": 25.00,
+    "monto_agregado": 0.00,
+    "total": 25.00,
+    "id_metodopago": { "$oid": "60c72b2f9b1e8b001c8e4da2" },
+    "numero_tarjeta": null,
+    "fecha_vencimiento": null,
+    "titular": null,
+    "cvv": null,
+    "numero_yape": "987654321",
+    "codigo_yape": "YP1234",
+    "detalles": [
+      {
+        "id_producto": { "$oid": "60c72b2f9b1e8b001c8e4f0f" },
+        "cantidad": 1,
+        "subtotal": 10.50
+      },
+      {
+        "id_producto": { "$oid": "60c72b2f9b1e8b001c8e4f13" },
+        "cantidad": 1,
+        "subtotal": 11.00
+      }
+    ]
+  }
+]

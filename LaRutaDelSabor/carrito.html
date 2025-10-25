@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Ruta del Sabor</title>
+    <link rel="shortcut icon" href="icon/logo.png" type="image/png">
+    <link rel="stylesheet" href="css/carrito.css">
+</head>
+<body>
+    <header class="header">
+        <div class="contenedor">
+            <div class="barra">
+                <a class="logo" href="index.html">
+                    <img src="Icon/logo.png" alt="Logo" class="responsive-logo">
+                </a>
+
+                <nav class="navegacion">
+                    <a href="index.html" class="navegacion_enlace"><p class="p1">Inicio</p></a>
+                    <a href="menu.html" class="navegacion_enlace"><p>Menú</p></a>
+                    <a href="nosotros.html" class="navegacion_enlace"><p>Nosotros</p></a>
+                    <a href=index.html#contacto" class="navegacion_enlace"><p>Contactos</p></a>
+                </nav>
+                <div id="botones-autenticacion">
+                <!-- Botones dinámicos se insertarán aquí mediante JavaScript -->
+                <!-- Botones de iniciar sesion y carrito -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="seccion-carrito">
+            <div class="carrito-contenedor">
+                <h2>Tu Carrito</h2>
+                <div class="carrito-grid" id="carrito-grid">
+                    <!-- Productos se agregarán dinámicamente aquí -->
+                </div>
+                <div class="resumen" id="resumen">
+                    <h3>Subtotal: S/ <span id="subtotal">0.00</span></h3>
+                    <div class="resumen-botones">
+                        <button class="btn-seguir" id="btn-seguir"> <-- Seguir Comprando</button>
+                        <button class="btn-comprar" id="btn-comprar">Ir a Pagar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+     <div class="footer-redes">
+        <a href="https://facebook.com" target="_blank" class="social-link">
+            <img src="icon/Redes/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-link">
+            <img src="icon/Redes/instagram.svg" alt="Instagram" class="instagram">
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="social-link">
+            <img src="icon/Redes/tiktok.svg" alt="TikTok" class="tiktok">
+        </a>
+    </div>
+        <!-- Línea blanca -->
+      <hr class="footer-linea" />
+      <p class="footer-copy">© 2025 Restaurant La Ruta del Sabor. Todos los derechos reservados.</p>
+    </footer>
+
+    <div class="bottom-nav">
+        <a href="index.html">
+            <span><img src="Icon/InicioM (1).png" alt=""></span>
+            <p>Inicio</p>
+        </a>
+        <a href="menu.html">
+            <span><img src="Icon/Menu.png" alt=""></span>
+            <p>Menú</p>
+        </a>
+        <a href="Nosotros.html">
+            <span><img src="Icon/Nosotros.png" alt=""></span>
+            <p>Nosotros</p>
+        </a>
+        <a href="index.html#contacto">
+            <span><img src="Icon/telefono.png" alt=""></span>
+            <p>Contactos</p>
+        </a>
+    </div>
+
+    <script src="js/carrito.js"></script>
+</body>
+</html>

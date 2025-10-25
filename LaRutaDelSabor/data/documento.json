@@ -1,0 +1,14 @@
+[
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4d41" },
+    "tipo_documento": "DNI"
+  },
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4d42" },
+    "tipo_documento": "RUC"
+  },
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4d43" },
+    "tipo_documento": "CARNÉ EXTRANJERIA"
+  }
+]

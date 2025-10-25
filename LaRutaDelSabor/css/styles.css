@@ -1,0 +1,1112 @@
+:root{
+    --color-principal: #ffc640;
+    --color-secundario: #ff7f00;
+    --color-terciario: #c1440e;
+}
+
+html{
+    box-sizing: border-box;
+    font-size: 62.5%; /*Importante*/
+}
+
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+
+body{
+    font-family: cursive;
+    font-size: 1.6rem;
+    line-height: 2;
+    margin: 0; /* Elimina márgenes del body */
+
+}
+
+/*Global*/
+.contenedor{
+    max-width: 140rem;
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+    font-family: cursive !important;
+}
+
+h1{font-size: 4.8rem  !important;}
+h2{font-size: 3.8rem  !important;} 
+h3{font-size: 1.8rem  !important;}
+h4{font-size: 2.4rem  !important;}
+
+img{
+    max-width: 100%;
+}
+
+/* Utilidades */
+.no-margin{
+    margin: 0 !important;
+}
+
+/* Header */
+.header{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.669), rgba(0, 0, 0, 0.705)),  url(../icon/Header-fondo.jpg);
+    height: 50rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; /*Lo acomoda segun su posicion de la pantalla*/
+}
+
+.header_texto{
+    text-align: center;
+    color: white;
+    margin-top: 10rem ;
+}
+
+.header_texto p{
+    font-size: 2rem;
+}
+
+.barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navegacion{
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+}
+
+.navegacion p {
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.8s ease;
+    &:hover{
+    color: var(--color-secundario);
+    }    
+}
+
+.navegacion_enlace{
+    display: block;
+    text-align: center;
+    font-size: 1.8rem;
+    color: white;
+}
+
+.logo{
+    flex: 1 1 100px;
+    align-items: center;
+}
+
+.responsive-logo{
+    width: 190px;
+    transition: transform 0.3s ease;
+}
+
+.responsive-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Botones de Inicio de sesion */
+#botones-autenticacion {
+  margin-left:2rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Estilos para los botones de administrador */
+.admin-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 15px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease;
+    &:hover{
+    background-color: var(--color-secundario);
+    color: rgb(255, 255, 255);
+    transform: scale(1.05);
+  }
+}
+
+.admin-btn i {
+  font-size: 1.2em;
+}
+
+/* Vínculos (botones de Iniciar Sesión y Carrito) */
+.registro a, .carrito a {
+  display: flex;
+  background-color: #000;
+  padding: 1rem 1.6rem;
+  border-radius: 1.5rem;
+  transition: background-color 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease;
+  &:hover{
+    background-color: var(--color-secundario);
+    color: rgb(255, 255, 255);
+    transform: scale(1.05);
+  }
+}
+
+.registro img, .carrito img {
+  width: 2.5rem;
+  height: 2.5rem;
+  filter: brightness(0) invert(1);
+}
+
+/* === CARRUSEL PERSONALIZADO === */
+/* Imagenes Carrusel */
+.carrusel-personalizado {
+    position: relative;
+    width: 100%;
+    max-width: 150rem; 
+    margin: 5rem auto;
+    overflow: hidden;
+}
+
+.carrusel-ant {
+    position: relative;
+    width: 100%;
+    height: 55rem; /* Altura fija para mantener proporción */ 
+}
+
+.carrusel-item {
+    position: absolute;
+    top: 0;
+    left: 100%; /* Inician fuera de la vista */
+    width: 100%;
+    height: 100%;
+}
+
+.carrusel-item.active {
+    position: relative;
+    left: 0;
+    transform: translateX(0);
+    z-index: 2;
+}
+
+.carrusel-item.exit-left {
+    transform: translateX(-100%);
+}
+
+.carrusel-item.enter-right {
+    transform: translateX(0);
+    z-index: 3;
+}
+
+/* Imágenes */
+.carrusel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit:initial; /* Responderá a su altura y ancho según el valor inicial de su propiedad */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.6s ease;
+}
+
+.carrusel-item img:hover {
+    transform: scale(1.04);
+}
+
+/* Flechas dentro de los banner*/
+.carrusel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.6s ease;
+}
+
+.carrusel-control.prev {
+    left: 2rem; /* Dentro de la imagen, cerca del borde izquierdo */
+}
+
+.carrusel-control.next {
+    right: 2rem; /* Dentro de la imagen, cerca del borde derecho */
+}
+
+.carrusel-control:hover {
+    color: #000000;
+}
+
+/* Indicadores */
+.carrusel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.carrusel-indicators button {
+    width: 30px;
+    height: 3px;
+    background-color: #000000;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.carrusel-indicators button.active {
+    background-color: #ffffff;
+}
+
+/* Galeria de Menu */
+.titulo-card{
+    font-weight: 700;
+    background: linear-gradient(270deg, var(--color-terciario),  #a76335, var(--color-secundario), #d2691e, var(--color-principal), #000);
+    background-size: 400% 400%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: cambioColores 6s ease infinite;
+    border-radius: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 2px solid var(--color-principal);
+    border-top: 2px solid var(--color-principal);
+}
+
+/* Animación de degradado */
+@keyframes cambioColores {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 25% 50%; }
+    50% { background-position: 50% 50%; }
+    75% { background-position: 75% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 2rem;
+    width: 100%;
+    height: 50rem;
+    perspective: 1000px;
+    margin: 3rem auto 2rem;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1s ease-in-out;
+    cursor: pointer;
+
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    &:hover{
+        transform: rotateY(180deg);
+    }
+}
+
+.front-page, .front-page2, .front-page3,.front-page4,
+.back-page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+}
+
+.front-page {
+    background-image:url(../icon/hamburguesa.jpg);
+    background-size:cover;
+}
+.front-page2 {
+    background-image:url(../icon/Alitas/alitas.jpg);
+    background-size:cover;
+}
+.front-page3 {
+    background-image:url(../icon/Pollo/pollo7.jpg);
+    background-size:cover;
+}
+.front-page4 {
+    background-image:url(../icon/Papas/papas3.jpg);
+    background-size:cover;
+}
+
+.card-info{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-top: 150px;
+    padding: 20px; /* Nuevo: espacio interno */
+    box-sizing: border-box;
+}
+
+.card-subtitulo {
+    font-size: 2.2rem;
+    color: #fffffff9;
+    margin-top: 10rem;
+}
+
+.back-page{
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg);
+}
+
+.card-content{
+    text-align: center;
+    padding: 1rem;
+    max-width: 50%;
+    font-size: 1.5rem;
+    color: #fff;
+    line-height: 1.6;
+}
+
+.card-button {
+    margin-top: 1rem;
+    background-color: var(--color-secundario);
+    width: 100%;
+    color: #fff;
+    padding: 1rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover{
+        background-color: transparent;
+        color: var(--color-secundario);
+        border: 1px solid var(--color-secundario);
+    }
+}
+
+/* Contenedor Menu video del cuadro (Ver menu completo)*/
+.video-btn-container {
+  position: relative;
+  width: fit-content;
+  height: 8rem;
+  margin: 0 auto;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.video-fondo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.ver-mas-btn {
+  position: relative;
+  z-index: 1;
+  background-color: black;
+  color: white;
+  padding: 4rem;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+}
+
+.video-btn-container:hover .video-fondo {
+  opacity: 1;
+}
+
+.video-btn-container:hover .ver-mas-btn {
+  background-color: transparent;
+}
+
+
+/* Carrusel de Reseñas */
+/* Contenedor principal del carrusel */
+.max-w-7xl {
+    max-width: 1200px !important; 
+    margin: 0 auto
+}
+
+#contenedorResenas {
+    background-color: #f5f5f5fb; 
+    padding: 3rem; 
+}
+
+/* Título de la sección */
+#contenedorResenas h2 {
+    color: #000; 
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Estilos del carrusel de reseñas */
+#carruselResenas {
+    display: flex;
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    scroll-snap-type: x mandatory; 
+    gap: 3rem; 
+    padding: 1rem; 
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Ocultar la barra de desplazamiento */
+#carruselResenas::-webkit-scrollbar {
+    height: 8px; /* Altura de la barra de desplazamiento */
+}
+
+#carruselResenas::-webkit-scrollbar-track {
+    background: #000000; /* Color del fondo de la barra */
+    border-radius: 10px;
+}
+
+#carruselResenas::-webkit-scrollbar-thumb {
+    background: var(--color-principal); /* Color del deslizador */
+    border-radius: 10px;
+}
+
+#carruselResenas::-webkit-scrollbar-thumb:hover {
+    background: var(--color-principal); /* Color al pasar el ratón */
+}
+
+/* Estilos de las tarjetas de reseñas (carta-reseña) */
+.carta-reseña {
+    flex: 0 0 250px; 
+    height: 15rem;
+    background: #ffffff; 
+    padding: 2rem;
+    border-radius: 1rem; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #e2e8f0; 
+    scroll-snap-align: start; 
+    transition: transform 0.3s ease; 
+}
+
+.carta-reseña:hover {
+    transform: translateY(-5px);
+}
+
+/* Estilos para los botones de navegación del carrusel */
+#contenedorResenas button:not(.bg-red-600):not(.bg-blue-600) { 
+    background: var(--color-secundario) !important; 
+    color: #fff !important;  
+    font-size: 2.5rem !important; 
+    width:40px;
+    height: 80px; 
+    top: 45%;
+    transform: translateY(-50%);
+    border-radius: 1rem !important;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    z-index: 10 !important;
+}
+
+#contenedorResenas button:not(.bg-red-600):not(.bg-blue-600):hover {
+    background-color: #000 !important; 
+    color: var(--color-secundario) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+#contenedorResenas button:nth-child(1) {
+    left: 2px; 
+}
+
+#contenedorResenas button:nth-child(2) {
+    right: 2px; 
+}
+
+/* Estilos del botón "Agregar Comentario" */
+#contenedorResenas .bg-red-600 {
+    width: 20rem;
+    font-size: 1.5rem !important;
+    background-color: var(--color-secundario); 
+    color: #ffffff; 
+    padding: 1rem !important; 
+    border-radius: 2rem; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s, transform 0.2s;
+    &:hover{
+        background-color: #000000; 
+        color: var(--color-secundario) !important;
+        border: 1px solid var(--color-secundario);
+        transform: scale(1.05);
+    }
+}
+
+#modalComentario .bg-white {
+    margin: 1rem auto;
+    font-size: 1.3rem !important;
+    background: #fff; 
+    border-radius: 1rem;
+    padding: 3rem;
+    max-width: 50rem; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+/* Estilos de los inputs y textarea del modal */
+#modalComentario input,
+#modalComentario select,
+#modalComentario textarea {
+    border: 1px solid #e2e8f0; 
+    border-radius: 1rem !important; 
+    padding: 0.3rem !important; 
+    width: 100%;  
+    font-size: 1rem; /* Tamaño de fuente */
+    transition: border-color 0.3s !important;
+}
+
+#modalComentario input:focus,
+#modalComentario select:focus,
+#modalComentario textarea:focus {
+    border-color: #000 !important; /* Color del borde al enfocar */
+    outline: none !important; 
+}
+
+/* Estilos de los botones del modal */
+#modalComentario button {
+    border-radius: 2rem !important; 
+    font-size: 1.5rem !important; 
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#modalComentario .bg-blue-600 {
+    height: 4rem;
+    width: 30% !important;
+    margin-right: 1rem !important;
+    background-color: #4299e1;
+    color: #000000 !important;
+    &:hover{
+        background-color: #000; 
+        color: #4299e1 !important;
+        border: 2px solid #4299e1 !important;
+        transform: scale(1.05);
+    }
+}
+
+#modalComentario .bg-red-600 {
+    height: 4rem;
+    justify-content: center !important;
+    align-items: center !important;
+    display: flex;
+    width: 30% !important;
+    background-color: #e53e3e; 
+    color: #000000 !important; 
+    &:hover{
+        background-color: #000 !important; 
+        color: #e53e3e !important;
+        border: 2px solid #e53e3e !important;
+        transform: scale(1.05);
+        border: none;
+    }
+}
+
+/* Footer */
+footer {
+  padding: 20px;
+  background-color: #282727;
+  color: white;
+  font-family: cursive;
+}
+
+.footer-contenedor {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+  column-gap: 2rem;
+  padding: 1rem;
+}
+
+.footer-seccion {
+  min-width: 25rem;
+}
+
+.icono {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.linea-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 1rem;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.linea-info a {
+  color: white;
+  text-decoration: none;
+  &:hover{
+    color: var(--color-terciario);
+  }
+}
+
+.footer-seccion h3 {
+  margin-bottom: 15px;
+  border-bottom: 2px solid #fff;
+  padding-bottom: 5px;
+}
+
+.footer-seccion ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-seccion a {
+  color: #f0f0f0;
+  transition: color 0.3s;
+  &:hover{
+    color: #ea613e;
+  }
+}
+
+/* Tabla horario Footer */
+.contacto-tabla {
+  width:100%;
+  font-size: 1.4rem;
+}
+
+/* Celdas normales */
+.contacto-tabla td {
+  border: 3px solid rgb(0, 0, 0);
+  background-color: white;
+  color: black;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Encabezado */
+.contacto-tabla th {
+  border: 3px solid black;
+  background-color: #000000;
+  color: var(--color-secundario);
+  padding: 10px;
+  text-align: center;
+}
+
+/* Línea separadora */
+.footer-linea {
+  border: none;
+  border-top: 1px solid white;
+  width: 100%;
+  margin: 2rem auto;
+}
+
+.footer-copy {
+  text-align: center;
+}
+
+.footer-redes {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-redes a img {
+    width: 40px;
+    margin: 0 20px;
+    &:hover{
+        transform: scale(1.2);
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: invert(40%) sepia(98%) saturate(7499%) hue-rotate(202deg) brightness(97%) contrast(101%);
+    }
+}
+
+.footer-redes a img.instagram:hover {
+    filter: invert(18%) sepia(100%) saturate(7500%) hue-rotate(270deg) brightness(90%) contrast(110%);
+}
+
+.footer-redes a img.tiktok:hover {
+    filter: invert(1);
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    70% {
+        transform: scale(9.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* Clase que activamos con JS */
+.social-explode {
+    animation: explode 0.6s ease forwards;
+}
+
+.bottom-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+/* HEADER */
+  .header {
+    height: 35rem;
+  }
+
+  .header_texto {
+    margin-top: 2rem;
+  }
+
+  .header_texto h2 {
+    font-size: 2em !important;
+  }
+
+  .header_texto p {
+    font-size: 1.4rem;
+    padding: 0 2rem;
+  }
+
+  /* BARRA DE NAVEGACIÓN - MODIFICADA */
+  .barra {
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .responsive-logo {
+    width: 120px;
+  }
+
+  /* OCULTAR NAVEGACIÓN EN MÓVIL */
+  .navegacion {
+    display: none;
+  }
+
+  #botones-autenticacion {
+    margin-left: auto; /* Empuja los botones a la derecha */
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Ajustar tamaño de botones en móvil */
+  .registro a, .carrito a {
+    padding: 0.8rem 1.2rem;
+  }
+
+  .registro img, .carrito img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .admin-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.3rem;
+  }
+
+  /* CARRUSEL */
+  .carrusel-personalizado {
+    margin: 3rem auto;
+  }
+
+  .carrusel-ant {
+    height: 30rem;
+  }
+
+  .carrusel-control {
+    font-size: 2rem;
+  }
+
+  .carrusel-control.prev {
+    left: 1rem;
+  }
+
+  .carrusel-control.next {
+    right: 1rem;
+  }
+
+  /* GALERÍA DE MENÚ */
+  .titulo-card {
+    font-size: 2.8rem !important;
+  }
+
+  .wrapper {
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+    gap: 2rem;
+    margin: 2rem auto;
+  }
+
+  .card {
+    height: 32rem;
+  }
+
+  .card-subtitulo {
+    font-size: 1.5rem;
+    margin-top: -2rem;
+  }
+
+  .card-content {
+    max-width: 80%;
+    font-size: 1.4rem;
+  }
+
+  /* VIDEO BOTÓN */
+  .video-btn-container {
+    height: 7rem;
+    margin-bottom: 3rem;
+  }
+
+  .ver-mas-btn {
+    padding: 3rem;
+    font-size: 1.4rem;
+  }
+
+  /* CARRUSEL DE RESEÑAS */
+  #contenedorResenas {
+    padding: 2rem;
+  }
+
+  #contenedorResenas h2 {
+    font-size: 2.5rem !important;
+  }
+
+  .carta-reseña {
+    flex: 0 0 220px;
+    height: 14rem;
+    padding: 1.5rem;
+  }
+
+  #contenedorResenas button:not(.bg-red-600):not(.bg-blue-600) {
+    width: 35px;
+    height: 70px;
+    font-size: 2rem !important;
+  }
+
+  #contenedorResenas .bg-red-600 {
+    width: 18rem;
+    font-size: 1.4rem !important;
+  }
+
+  /* MODAL DE COMENTARIOS */
+  #modalComentario .bg-white {
+    max-width: 45rem;
+    padding: 2.5rem;
+  }
+
+  #modalComentario h3 {
+    font-size: 1.6rem !important;
+    margin-bottom: 1.5rem;
+  }
+
+  #modalComentario input,
+  #modalComentario select,
+  #modalComentario textarea {
+    font-size: 1.4rem;
+  }
+
+  #modalComentario button {
+    font-size: 1.4rem !important;
+  }
+
+  #modalComentario .bg-blue-600,
+  #modalComentario .bg-red-600 {
+    height: 3.5rem;
+    width: 35% !important;
+  }
+
+    /* FOOTER ACORDEÓN */
+  .footer-contenedor {
+    display: block; /* Cambia de grid a block */
+    padding: 0;
+  }
+
+  .footer-seccion {
+    min-width: auto;
+    border-bottom: 2px solid #444;
+    overflow: hidden;
+  }
+
+  .footer-seccion:last-child {
+    border-bottom: none;
+  }
+
+  /* Encabezado clickeable del acordeón */
+  .footer-seccion h3 {
+    font-size: 1.8rem !important;
+    margin: 0;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease;
+    background-color: #333;
+    user-select: none; /* Evita selección de texto */
+  }
+
+  .footer-seccion h3:hover {
+    background-color: #444;
+  }
+
+  /* Icono de flecha en el encabezado */
+  .footer-seccion h3::after {
+    content: '▼';
+    position: absolute;
+    right: 2rem;
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+  }
+
+  /* Rotar flecha cuando está activo */
+  .footer-seccion.active h3::after {
+    transform: rotate(180deg);
+  }
+
+  /* Contenido del acordeón */
+  .footer-info,
+  .footer-seccion ul,
+  .contacto-tabla {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 2rem;
+  }
+
+  /* Estado activo (expandido) */
+  .footer-seccion.active .footer-info,
+  .footer-seccion.active ul,
+  .footer-seccion.active .contacto-tabla {
+    max-height: 500px; /* Altura máxima generosa */
+    padding: 1.5rem 2rem;
+  }
+
+  /* Ajustes adicionales */
+  .footer-seccion ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .footer-seccion ul li {
+    padding: 0.8rem 0;
+  }
+
+  .linea-info {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .contacto-tabla {
+    font-size: 1.2rem;
+    width: 100%;
+  }
+
+  /* Animación suave de apertura */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .footer-seccion.active .footer-info,
+  .footer-seccion.active ul,
+  .footer-seccion.active .contacto-tabla {
+    animation: slideDown 0.3s ease;
+  }
+
+  /* Ajustar espaciado del footer */
+  .footer-redes {
+    margin-top: 2rem;
+    padding: 1.5rem 0;
+  }
+
+  .footer-linea {
+    margin: 1.5rem 2rem;
+  }
+
+  .footer-copy {
+    font-size: 1.3rem;
+    padding: 1rem 2rem;
+  }
+  
+  /* NAVEGACIÓN INFERIOR */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    padding: 1rem;
+    left: 0;
+    width: 100%;
+    height: 6rem;
+    background-color: #ffffff;
+    justify-content: space-around;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  .bottom-nav a {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .bottom-nav a:hover {
+    color: var(--color-secundario);
+    transform: scale(1.1);
+  }
+
+  .bottom-nav p {
+    margin: 0;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+
+  .bottom-nav a span img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
+  /* ESPACIADO PARA LA NAVEGACIÓN INFERIOR */
+  body {
+    padding-bottom: 7rem;
+  }
+
+  /* CONTENEDOR GENERAL */
+  .contenedor {
+    max-width: 120rem;
+    width: 95%;
+    padding: 1.5rem;
+  }
+}

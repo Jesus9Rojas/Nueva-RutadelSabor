@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Ruta del Sabor</title>
+    <link rel="shortcut icon" href="icon/logo.png" type="image/png">
+    <link rel="stylesheet" href="css/nosotros.css">
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    renderAuthButtons();
+    });
+
+function renderAuthButtons() {
+    const authButtons = document.getElementById('botones-autenticacion');
+    const user = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
+    
+    authButtons.innerHTML = '';
+
+    if (token && user && user.email === 'test@test.com') {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="admin.html" class="admin-btn">
+                    <i class="bi bi-basket-fill"></i> Registrar Productos
+                </a>
+            </div>
+            <div class="registro">
+                <a href="#" onclick="logout()" class="admin-btn">
+                    <i class="bi bi-box-arrow-right"></i> Salir Modo Admin
+                </a>
+            </div>
+        `;
+    } else if (token && user) {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="#" onclick="logout()"><img src="Icon/cerrar-con-llave.png" alt="Carrito"></a>
+            </div>
+            <div class="carrito">
+                <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
+            </div>
+        `;
+    } else {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="login.html"><img src="Icon/iniciar_sesion.png" alt="Iniciar Sesión"></a>
+            </div>
+            <div class="carrito">
+                <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
+            </div>
+        `;
+    }
+}
+
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = 'index.html';
+}
+
+//Agrandamiento de las redes al abrir
+document.addEventListener("DOMContentLoaded", () => {
+    const socialLinks = document.querySelectorAll(".social-link");
+    const logo = document.querySelector(".logo-img");
+
+    // Efecto de explosión en las redes sociales
+    socialLinks.forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const icon = this.querySelector("img");
+            icon.classList.add("social-explode");
+
+            setTimeout(() => {
+                window.open(this.href, "_blank");
+                icon.classList.remove("social-explode");
+            }, 500);
+        });
+    });
+  });
+    </script>
+<body>
+
+    <header class="header">
+        <div class="contenedor">
+            <div class="barra">
+                <a class="logo" href="index.html">
+                    <img src="Icon/logo.png" alt="Logo" class="responsive-logo">
+                </a>
+
+                <nav class="navegacion">
+                    <a href="index.html" class="navegacion_enlace"><p class="p1">Inicio</p></a>
+                    <a href="menu.html" class="navegacion_enlace"><p>Menú</p></a>
+                    <a href="#inicio" class="navegacion_enlace"><p>Nosotros</p></a>
+                    <a href="index.html#contacto" class="navegacion_enlace"><p>Contactos</p></a>
+                </nav>
+                <div id="botones-autenticacion">
+                <!-- Botones dinámicos se insertarán aquí mediante JavaScript -->
+                <!-- Botones de iniciar sesion y carrito -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+        <div class="contenido-principal" id="inicio">
+        <main class="blog">
+            <h2>Nosotros</h2>
+            <article class="entrada">
+                <div class="entrada_imagen">
+                    <picture>
+                        <source loading="lazy" srcset="Icon/cocinando.jpg" type="image/webp">
+                        <img src="Icon/cocinando.jpg" alt="Nuestro equipo cocinando hamburguesas">
+                    </picture>
+                </div>   
+                <div class="entrada_contenido">
+                    <h4 class="no-margin">
+                        Nuestra Historia
+                    </h4>
+                    <p>La Ruta del Sabor nació de la pasión por la buena comida y el deseo de ofrecer las mejores
+                        hamburguesas y salchipapas de la ciudad.
+                        Fundado en 2021 por Panchito, lo que comenzó como un pequeño carrito de comida se ha convertido
+                        en un punto de encuentro para los amantes de los sabores auténticos y las porciones generosas.</p>
+                </div>   
+            </article>
+        </main>
+        <aside class="sidebar">
+            <ul class="informacion no-padding">
+                <li class="widget-informacion">
+                    <h4 class="no margin">Nuestra Filosofía</h4>
+                    <p class="widget-informacion_label">En La Ruta del Sabor, creemos que la clave de una gran hamburguesa o salchipapa está en la
+                        calidad de los ingredientes y la dedicación en cada paso de la preparación.
+                        Utilizamos carne fresca, pan artesanal, vegetales de la región y salsas caseras para garantizar
+                        una explosión de sabor en cada bocado.
+                        Nuestra misión es brindarte una experiencia gastronómica que te haga sentir como en casa, con un
+                        servicio amable y un ambiente acogedor.
+                    </p>
+                </li>
+
+                <li>
+                    <h4 class="no margin">Lo Que Nos Distingue</h4>
+                        <li class="comienzo"><b>🍅 Ingredientes Frescos:</b> Seleccionamos cuidadosamente cada ingrediente.</li>
+                        <li><b>🍔 Recetas Únicas:</b> Desde clásicas hasta combinaciones atrevidas.</li>
+                        <li><b>🏠 Ambiente Agradable:</b> Queremos que te sientas como en casa.</li>
+                        <li><b>🌱 Compromiso con la Comunidad:</b> Apoyamos a los productores locales.</li>
+                        <p>
+                        Te invitamos a visitarnos y descubrir por qué La Ruta del Sabor es el destino preferido de los
+                        que buscan una comida rápida deliciosa y de calidad. ¡Te esperamos!
+                        </p>
+                </li>
+            </ul>
+        </aside>
+        </div>
+
+        <footer>
+     <div class="footer-redes">
+        <a href="https://facebook.com" target="_blank" class="social-link">
+            <img src="icon/Redes/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-link">
+            <img src="icon/Redes/instagram.svg" alt="Instagram" class="instagram">
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="social-link">
+            <img src="icon/Redes/tiktok.svg" alt="TikTok" class="tiktok">
+        </a>
+    </div>
+        <!-- Línea blanca -->
+      <hr class="footer-linea" />
+      <p class="footer-copy">© 2025 Restaurant La Ruta del Sabor. Todos los derechos reservados.</p>
+    </footer>
+    
+    <div class="bottom-nav">
+      <a href="index.html">
+        <span><img src="Icon/InicioM (1).png" alt=""></span>
+        <p>Inicio</p>
+      </a>
+      <a href="menu.html">
+        <span><img src="Icon/Menu.png" alt=""></span>
+        <p>Menú</p>
+      </a>
+      <a href="Nosotros.html">
+        <span><img src="Icon/Nosotros.png" alt=""></span>
+        <p>Nosotros</p>
+      </a>
+      <a href="index.html#contacto">
+        <span><img src="Icon/telefono.png" alt=""></span>
+        <p>Contactos</p>
+      </a>
+    </div>
+
+</body>
+</html>

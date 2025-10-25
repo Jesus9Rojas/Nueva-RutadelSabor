@@ -1,0 +1,50 @@
+[
+  {
+    "id_cliente": 1,
+    "nombre_cliente": "Daniel Romaní",
+    "comentarios": [
+      {
+        "medio": "Atención al Cliente",
+        "texto": "Muy buena atención al cliente.",
+        "puntuacion": "4/5",
+        "fecha": "2025-06-08T14:30:00Z"
+      },
+      {
+        "medio": "Correo Electrónico",
+        "texto": "Recibí una respuesta rápida a mi consulta.",
+        "puntuacion": "5/5",
+        "fecha": "2025-06-09T10:15:00Z"
+      }
+    ]
+  },
+  {
+    "id_cliente": 2,
+    "nombre_cliente": "María López",
+    "comentarios": [
+      {
+        "medio": "Ambiente",
+        "texto": "Me encantó la decoración y ambiente del lugar.",
+        "puntuacion": "5/5",
+        "fecha": "2025-06-10T16:00:00Z"
+      }
+    ]
+  },
+  {
+    "id_cliente": 3,
+    "nombre_cliente": "Luis Torres",
+    "comentarios": [
+      {
+        "medio": "Tiempo de espera",
+        "texto": "La comida demoró más de lo esperado.",
+        "puntuacion": "3/5",
+        "fecha": "2025-06-11T12:45:00Z"
+      },
+      {
+        "medio": "Comida",
+        "texto": "Deliciosa hamburguesa, ¡volveré!",
+        "puntuacion": "5/5",
+        "fecha": "2025-06-11T13:00:00Z"
+      }
+    ]
+  }
+]

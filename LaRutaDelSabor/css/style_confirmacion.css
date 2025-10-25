@@ -1,0 +1,310 @@
+:root {
+    --color-principal: #ffc640; 
+    --color-secundario: #ff7f00; 
+    --color-terciario: #c1440e; 
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; 
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: cursive;
+    font-size: 1.6rem;
+    line-height: 2;
+    margin: 0;
+    background-color: var(--color-secundario); 
+}
+
+/* Contenedor principal de la página de confirmación */
+.contenedor-pedido {
+    width: 100%;
+    max-width: 1140px; 
+    margin: 4rem auto ;
+    padding: 2rem 5rem;
+    border-radius: 2rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+    background-color: #fff;
+}
+
+.texto-confirmado{
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+/* Texto centrado horizontalmente */
+.texto-centrado {
+    text-align: center;
+    font-size: 3.8rem;
+}
+
+.texto-centrado2 {
+   margin-top: -5rem;
+    text-align: center;
+    font-size: 2.8rem;
+}
+
+/* Contenedor de la cuadrícula para tarjetas y totales */
+.contenedor-cuadricula {
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    gap: 2rem; 
+
+}
+
+/* Fila para la cuadrícula del resumen del pedido */
+.fila-pedido {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+/* Estilo para columnas generadas dinámicamente */
+.columna-pedido {
+    flex: 1 1 30.30%; 
+    box-sizing: border-box;
+}
+
+.cards-info{
+    font-size: 1.8rem;
+    font-family: cursive;
+    color: #000;
+    line-height: 1.5;
+}
+
+/* Estilo para la tarjeta de cada ítem del pedido */
+.tarjeta-pedido {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 2rem;
+    height: 100%; 
+    border-top: var(--color-secundario) 2rem solid;
+    border-bottom: var(--color-principal) 3rem solid;
+}
+
+/* Contenido de la tarjeta */
+.cuerpo-tarjeta {
+    padding: 1.25rem;
+    text-align: center; 
+}
+
+/* Título de la tarjeta (nombre del ítem) */
+.titulo-tarjeta {
+    font-size: 1.8rem;
+    font-family: cursive;
+    margin-bottom: 0.75rem;
+    color: var(--color-secundario);
+}
+
+/* Texto de la tarjeta (detalles del ítem) */
+.texto-tarjeta {
+    text-align: start;
+    font-size: 1.4rem;
+    font-family: cursive;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+    color: #000;
+}
+
+/* Imagen de producto */
+.carrito-img {
+  width:100%;
+  height: 250px; /* Fija una altura consistente */
+  object-fit: cover; /* Rellena el área sin deformar, recortando si es necesario */
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 50px;
+  display: block;
+}
+
+
+/* Botones */
+.boton-confirmar{
+  font-size: 1.6rem;
+  font-family: cursive;
+  background-color: var(--color-secundario);
+  color: #fff;
+  padding: 1rem;
+  width: 100%;
+  font-weight: bold;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  &:hover{
+    background-color:#000;
+    color: var(--color-secundario);
+    border: solid 1px var(--color-secundario);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+
+@media (max-width: 768px) {
+    /* CONTENEDOR */
+    .contenedor-pedido {
+        width: 90%;
+        margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 1.5rem;
+    }
+
+    /* TEXTOS */
+    .texto-centrado {
+        font-size: 2.8rem;
+    }
+
+    .texto-centrado2 {
+        font-size: 2rem;
+        margin-top: -3rem;
+    }
+
+    h3 {
+        font-size: 2.2rem !important;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    /* CUADRÍCULA */
+    .contenedor-cuadricula {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .fila-pedido {
+        gap: 1rem;
+    }
+
+    .columna-pedido {
+        flex: 1 1 100%;
+    }
+
+    /* TARJETAS */
+    .tarjeta-pedido {
+        border-radius: 1.5rem;
+        border-top-width: 1.5rem;
+        border-bottom-width: 2rem;
+    }
+
+    .cuerpo-tarjeta {
+        padding: 1rem;
+    }
+
+    .titulo-tarjeta {
+        font-size: 1.6rem;
+    }
+
+    .texto-tarjeta {
+        font-size: 1.3rem;
+    }
+
+    .carrito-img {
+        height: 180px;
+        border-radius: 30px;
+        padding: 8px;
+    }
+
+    /* INFO CLIENTE */
+    .cards-info {
+        font-size: 1.5rem;
+        text-align: start;
+    }
+
+    .cards-info p {
+        margin: 0.5rem 0;
+    }
+
+    /* BOTONES */
+    .boton-confirmar {
+        margin-top: 1.5rem;
+        padding: 0.8rem;
+        font-size: 1.4rem;
+        border-radius: 1.5rem;
+    }
+}
+
+@media (width >= 768px) and (width <= 1200px) {
+    /* CONTENEDOR */
+    .contenedor-pedido {
+        width: 85%;
+        margin: 10rem auto;
+        padding: 3rem;
+        border-radius: 1.8rem;
+    }
+
+    /* TEXTOS */
+    .texto-centrado {
+        font-size: 3.2rem;
+    }
+
+    .texto-centrado2 {
+        font-size: 2.4rem;
+        margin-top: -4rem;
+    }
+
+    h3 {
+        font-size: 2.5rem !important;
+    }
+
+    /* CUADRÍCULA */
+    .contenedor-cuadricula {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.8rem;
+    }
+
+    .fila-pedido {
+        gap: 1.2rem;
+    }
+
+    .columna-pedido {
+        flex: 1 1 45%;
+    }
+
+    /* TARJETAS */
+    .tarjeta-pedido {
+        border-radius: 1.8rem;
+        border-top-width: 1.8rem;
+        border-bottom-width: 2.5rem;
+    }
+
+    .cuerpo-tarjeta {
+        padding: 1.1rem;
+    }
+
+    .titulo-tarjeta {
+        font-size: 1.7rem;
+    }
+
+    .texto-tarjeta {
+        font-size: 1.4rem;
+    }
+
+    .carrito-img {
+        height: 200px;
+        border-radius: 40px;
+        padding: 9px;
+    }
+
+    /* INFO CLIENTE */
+    .cards-info {
+        font-size: 1.6rem;
+    }
+
+    .cards-info p {
+        margin: 0.6rem 0;
+    }
+
+    /* BOTONES */
+    .boton-confirmar {
+        padding: 0.9rem;
+        font-size: 1.5rem;
+        border-radius: 1.8rem;
+    }
+}
+

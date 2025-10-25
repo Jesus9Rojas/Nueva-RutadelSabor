@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Pago</title>
+    <link rel="shortcut icon" href="icon/logo.png" type="image/png">
+    <link rel="stylesheet" href="css/style_pago_detalles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+</head>
+<body>
+    
+<div class="contenedor pago-contenedor">
+    <h1 >Detalles de Pago</h1>
+
+    <!-- Barra de progreso -->
+    <div class="progress mb-4">
+        <div class="progress-bar" role="progressbar" style="width: 33.33%;" id="progress-bar">Paso 1 de 3</div>
+    </div>
+
+    <!-- Step 1: Datos del Cliente -->
+    <div class="paso active" id="step-1">
+        <h3>Datos del Cliente</h3>
+        <div class="fila">
+            <div class="columna-6">
+                <label for="nombre" class="etiqueta-formulario">Nombre</label>
+                <input type="text" class="entrada-formulario" id="nombre" required>
+            </div>
+            <div class="columna-6">
+                <label for="apellido" class="etiqueta-formulario">Apellido</label>
+                <input type="text" class="entrada-formulario" id="apellido" required>
+            </div>
+            <div class="columna-6">
+                <label for="correo" class="etiqueta-formulario">Correo</label>
+                <input type="email" class="entrada-formulario" id="correo" required>
+            </div>
+            <div class="columna-6">
+                <label for="telefono" class="etiqueta-formulario">Teléfono</label>
+                <input type="tel" class="entrada-formulario" id="telefono" required pattern="[0-9]{9}" title="Teléfono debe tener 9 dígitos numéricos">
+            </div>
+            <div class="columna-12">
+                <label class="etiqueta-formulario">Tipo de Comprobante</label>
+                <div>
+                    <input type="radio" name="comprobante" id="boleta" value="boleta" checked>
+                    <label for="boleta">Boleta</label>
+                    <input type="radio" name="comprobante" id="factura" value="factura">
+                    <label for="factura">Factura</label>
+                </div>
+            </div>
+            <div class="columna-6" id="dni-container">
+                <label for="dni" class="etiqueta-formulario">DNI</label>
+                <input type="text" class="entrada-formulario" id="dni" required pattern="[0-9]{8}" title="DNI debe tener 8 dígitos numéricos">
+            </div>
+            <div class="columna-6" id="ruc-container">
+                <label for="ruc" class="etiqueta-formulario">RUC</label>
+                <input type="text" class="entrada-formulario" id="ruc" pattern="[0-9]{11}" title="RUC debe tener 11 dígitos numéricos">
+            </div>
+        </div>  
+        <div class="info-container">
+            <p>Guardamos tu correo electrónico de manera 100% segura para:</p>
+            <ul>
+                <li>Identificar su perfil.</li>
+                <li>Notificar sobre los estados de su compra.</li>
+                <li>Guardar el historial de compras.</li>
+                <li>Facilitar el proceso de compras.</li>
+            </ul>
+            <div class="botones">
+            <a href="carrito.html" class="boton-confirmar"> <- Volver</a>
+            <button class="boton-confirmar" onclick="nextStep(1)">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 2: Método de Entrega -->
+<div class="paso d-none" id="step-2">
+        <h3>Método de Entrega</h3>
+        <div class="fila">
+            <div class="columna-12 info-entrega">
+                <input type="radio" name="entrega" id="delivery" value="delivery" checked>
+                <label for="delivery">Delivery (+ S/ 5.00)</label>
+                <input type="radio" name="entrega" id="recoger" value="recoger">
+                <label for="recoger">Recojo en Local</label>
+            </div>
+            <div class="columna-6" id="direccion-container">
+                <label for="direccion" class="etiqueta-formulario">Dirección</label>
+                <input type="text" class="entrada-formulario" id="direccion" required>
+            </div>
+            <div class="columna-6" id="referencia-container">
+                <label for="referencia" class="etiqueta-formulario">Referencia</label>
+                <input type="text" class="entrada-formulario" id="referencia" required>
+            </div>
+        </div>
+        <div class="info-container1">
+            <div class="botones1">
+                <button class="boton-confirmar" onclick="prevStep(2)">Atrás</button>
+                <button class="boton-confirmar" onclick="nextStep(2)">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Step 3: Método de Pago -->
+<div class="paso d-none" id="step-3">
+    <h3>Método de Pago</h3>
+    <div class="fila">
+        <div class="columna-12 info-entrega">
+            <input type="radio" name="pago" id="tarjeta" value="tarjeta" checked>
+            <label for="tarjeta">Tarjeta</label>
+            <input type="radio" name="pago" id="yape" value="yape">
+            <label for="yape">Yape</label>
+        </div>
+        <div class="columna-6 margen-abajo" id="tarjeta-container">
+            <label for="numero-tarjeta" class="etiqueta-formulario">Número de Tarjeta</label>
+            <input type="text" class="entrada-formulario" id="numero-tarjeta" required pattern="[0-9]{16}" title="Número de tarjeta debe tener 16 dígitos numéricos">
+        </div>
+        <div class="columna-6 margen-abajo" id="fecha-vencimiento-container">
+            <label for="fecha-vencimiento" class="etiqueta-formulario">Fecha de Vencimiento</label>
+            <input type="text" class="entrada-formulario" id="fecha-vencimiento" required pattern="(0[1-9]|1[0-2])/[0-9]{2}" placeholder="MM/YY" title="Fecha de vencimiento debe ser MM/YY (ej. 07/25)" maxlength="5">
+        </div>
+        <div class="columna-6 margen-abajo" id="cvv-container">
+            <label for="cvv" class="etiqueta-formulario">CVV</label>
+            <input type="text" class="entrada-formulario" id="cvv" required pattern="[0-9]{3}" title="CVV debe tener 3 dígitos numéricos" maxlength="3">
+        </div>
+        <div class="columna-6 margin-abajo" id="titular-container">
+            <label for="titular" class="etiqueta-formulario">Titular</label>
+            <input type="text" class="entrada-formulario" id="titular" required>
+        </div>
+        <div class="columna-6 margen-abajo oculto" id="yape-numero-container">
+            <label for="yape-numero" class="etiqueta-formulario">Número de Yape</label>
+            <input type="text" class="entrada-formulario" id="yape-numero" required>
+        </div>
+        <div class="columna-6 margen-abajo oculto" id="yape-codigo-container">
+            <label for="yape-codigo" class="etiqueta-formulario">Código</label>
+            <input type="text" class="entrada-formulario" id="yape-codigo" required>
+        </div>
+    </div>
+    <div class="info-container">
+        <p class="tamano-fuente-4">Subtotal: S/ <span id="subtotal">0.00</span></p>
+        <p class="tamano-fuente-4">Costo de Delivery: S/ <span id="delivery-cost">5.00</span></p>
+        <p class="tamano-fuente-4">Total: S/ <span id="total">0.00</span></p>
+        <div class="botones">
+            <button class="boton-confirmar" onclick="prevStep(3)">Atrás</button>
+            <button id="btn-procesar" class="boton-confirmar">Procesar Pago</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/pago_detalles.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+</html>

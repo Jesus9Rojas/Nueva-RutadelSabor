@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Ruta del Sabor</title>
+    <link rel="shortcut icon" href="icon/logo.png" type="image/png">
+    <link rel="stylesheet" href="css/login.css">
+<body>
+    <header class="header">
+        <div class="contenedor">
+            <div class="barra">
+                <a class="logo" href="index.html">
+                    <img src="Icon/logo.png" alt="Logo" class="responsive-logo">
+                </a>
+
+                <nav class="navegacion">
+                    <a href="index.html" class="navegacion_enlace"><p class="p1">Inicio</p></a>
+                    <a href="menu.html" class="navegacion_enlace"><p>Menú</p></a>
+                    <a href="nosotros.html" class="navegacion_enlace"><p>Nosotros</p></a>
+                    <a href="index.html#contacto" class="navegacion_enlace"><p>Contactos</p></a>
+                </nav>
+            <div class="carrito">
+                <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt=""></a>
+            </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="login-page"></div>
+
+    <!-- ===== TEMPLATE DE LOGIN CORREGIDO ===== -->
+    <template id="login-template">
+        <div class="form-container">
+            <div class="Logo2">
+                <a href="index.html">
+                <img src="Icon/logo.png" alt="Logo" class="responsive-img">
+                </a>
+            </div>
+            <form id="formulario-login">
+            <h2>Inicia Sesión en La Ruta del Sabor</h2>
+                <!-- Se cambió el label y el tipo a 'email' para que coincida con el backend -->
+                <div class="input-group">
+                <input type="email" id="usuario" required />
+                <label for="usuario">Ingrese su correo</label>
+                </div>
+                <div class="input-group">
+                <input type="password" id="contrasena"required/>
+                <label for="contrasena">Contraseña</label>
+                </div>
+                <button type="submit">Iniciar sesión</button>
+            </form>
+            <div class="boton-registro">
+                ¿No tienes una cuenta? <a href="#" id="mostrar-registro">Regístrate</a>
+            </div>
+        </div>
+        <div class="info-container">
+            <h2>Crear cuenta</h2>
+            <p>Crea una y aprovecha los beneficios:</p>
+            <ul>
+                <li>Realiza tus compras de manera más ágil.</li>
+                <li>Guarda múltiples direcciones de envío y facturación.</li>
+                <li>Realiza el seguimiento a tus compras y revisa tus pedidos realizados.</li>
+                <li>Haz una lista de productos favoritos.</li>
+            </ul>
+            <button class="btn-crear-cuenta" id="btn-mostrar-registro">Crear cuenta</button>
+    </template>
+
+    <!-- ===== TEMPLATE DE REGISTRO ===== -->
+    <template id="registro-template">
+        <div class="form-container2">
+            <div class="Logo2">
+                <a href="index.html">
+                    <img src="Icon/logo.png" alt="Logo" class="responsive-img">
+                </a>
+            </div>
+            <form id="registroForm">
+                <h2>Crea tu cuenta en La Ruta del Sabor</h2>
+                <div class="input-group">
+                    <input type="text" id="nombreRegistro" name="nombres" required>
+                    <label for="nombreRegistro">Nombres</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="apellidosRegistro" name="apellidos" required>
+                    <label for="apellidosRegistro">Apellidos</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="emailRegistro" name="email" required>
+                    <label for="emailRegistro">Correo electrónico</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="passwordRegistro" name="password" required>
+                    <label for="passwordRegistro">Contraseña</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="direccionRegistro" name="direccion">
+                    <label for="direccionRegistro">Dirección</label>
+                </div>
+                <div class="input-group">
+                    <input type="tel" name="telf">
+                    <label for="telefonoRegistro">Teléfono</label>
+                </div>
+                <div class="input-group">
+                    <input type="date" name="fecha">
+                    <label for="fechaRegistro">Fecha de nacimiento</label>
+                </div>
+                <button type="submit">Crear cuenta</button>
+            </form>
+            <div class="boton-registro">
+                ¿Ya tienes una cuenta? <a href="#" id="mostrar-login">Inicia sesión</a>
+            </div>
+        </div>
+    </template>
+
+    <footer>
+     <div class="footer-redes">
+        <a href="https://facebook.com" target="_blank" class="social-link">
+            <img src="icon/Redes/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-link">
+            <img src="icon/Redes/instagram.svg" alt="Instagram" class="instagram">
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="social-link">
+            <img src="icon/Redes/tiktok.svg" alt="TikTok" class="tiktok">
+        </a>
+    </div>
+        <!-- Línea blanca -->
+      <hr class="footer-linea" />
+      <p class="footer-copy">© 2025 Restaurant La Ruta del Sabor. Todos los derechos reservados.</p>
+    </footer>
+    
+    <div class="bottom-nav">
+      <a href="index.html">
+        <span><img src="Icon/InicioM (1).png" alt=""></span>
+        <p>Inicio</p>
+      </a>
+      <a href="menu.html">
+        <span><img src="Icon/Menu.png" alt=""></span>
+        <p>Menú</p>
+      </a>
+      <a href="Nosotros.html">
+        <span><img src="Icon/Nosotros.png" alt=""></span>
+        <p>Nosotros</p>
+      </a>
+      <a href="index.html#contacto">
+        <span><img src="Icon/telefono.png" alt=""></span>
+        <p>Contactos</p>
+      </a>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+</html>

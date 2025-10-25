@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pedido</title>
+    <link rel="shortcut icon" href="icon/logo.png" type="image/png">
+    <link rel="stylesheet" href="css/style_confirmacion.css">
+</head>
+<body>
+<div class="contenedor-pedido">
+    <h1 class="texto-centrado" id="confirmacion-header"></h1>
+    <p class="texto-centrado2" id="mensaje-entrega"></p>
+
+    <h3>Resumen del Pedido</h3>
+    <div class="contenedor-cuadricula">
+        <div class="fila-pedido" id="pedido-grid"></div>
+        <div class="cards-info">
+            <p><strong>Cliente:</strong> <span id="cliente-nombre"></span></p>
+            <p><strong>Comprobante:</strong> <span id="comprobante"></span></p>
+            <p><strong>Subtotal:</strong> S/ <span id="subtotal">0.00</span></p>
+            <p><strong>Costo de Delivery:</strong> S/ <span id="delivery-cost">0.00</span></p>
+            <p><strong>Total:</strong> S/ <span id="total">0.00</span></p>
+            <button onclick="window.location.href='index.html'" class="boton-confirmar">Volver al Inicio</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/confirmacion.js"></script>
+</body>
+</html>

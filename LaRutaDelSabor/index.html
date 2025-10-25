@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Ruta del Sabor</title>
+    <link rel="shortcut icon" href="icon/logo.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    
+<body>
+
+    <header class="header">
+        <div class="contenedor">
+            <div class="barra">
+                <a class="logo" href="index.html">
+                    <img src="Icon/logo.png" alt="Logo" class="responsive-logo">
+                </a>
+
+                <nav class="navegacion">
+                    <a href="#inicio" class="navegacion_enlace"><p class="p1">Inicio</p></a>
+                    <a href="menu.html" class="navegacion_enlace"><p>Menú</p></a>
+                    <a href="nosotros.html" class="navegacion_enlace"><p>Nosotros</p></a>
+                    <a href="#contacto" class="navegacion_enlace"><p>Contactos</p></a>
+                </nav>
+                <div id="botones-autenticacion">
+                <!-- Botones dinámicos se insertarán aquí mediante JavaScript -->
+                <!-- Botones de iniciar sesion y carrito -->
+                </div>
+            </div>
+        </div>
+        <div class="header_texto">
+            <h2 class="no-margin">Restaurante La Ruta Del Sabor</h2>
+            <p class="no-margin">"Donde el sabor se convierte en tradición, ofreciendo una experiencia culinaria única que recorre los caminos del gusto"</p>
+        </div>
+    </header>
+
+        
+    <main>
+        <div class="inicio" id="inicio">
+            <div class="imagenes-promocional">
+                <div class="carrusel-personalizado">
+                    <!-- Imágenes del carrusel -->
+                    <div class="carrusel-ant">
+                        <div class="carrusel-item active">
+                            <img src="icon/banner1.jpg" alt="Banner 1">
+                        </div>
+                        <div class="carrusel-item">
+                            <img src="icon/banner2.jpg" alt="Banner 2">
+                        </div>
+                        <div class="carrusel-item">
+                            <img src="icon/banner3.jpg" alt="Banner 3">
+                        </div>
+                    </div>
+                    <!-- Flechas -->
+                    <button class="carrusel-control prev">&#10094;</button>
+                    <button class="carrusel-control next">&#10095;</button>
+                    <!-- Indicadores -->
+                    <div class="carrusel-indicators"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="contenedor">
+        <h2 class="titulo-card">Elige lo que más te guste!!</h2>
+        <section class="card-custom"></section>
+        <!-- Galería de estilo visual tipo secciones de menú -->
+    <div class="wrapper">
+        <div class="card">
+            <div class="front-page">
+                <div class="card-info">
+                    <p class="card-subtitulo">Hamburguesa</p>
+                </div>
+            </div>
+            <div class="back-page">
+                <div class="card-content">
+                    <p>Disfruta de una jugosa hamburguesa hecha con carne de primera calidad</p>
+                    <button class="card-button">Ver más</button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="front-page2">
+                <div class="card-info">
+                    <p class="card-subtitulo">Alitas</p>
+                </div>
+            </div>
+            <div class="back-page">
+                <div class="card-content">
+                    <p>Saborea alitas crujientes con un toque picante o a tu gusto, perfectas para compartir</p>
+                    <button class="card-button">Ver más</button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="front-page3">
+                <div class="card-info">
+                    <p class="card-subtitulo">Pollo</p>
+                </div>
+            </div>
+            <div class="back-page">
+                <div class="card-content">
+                    <p>Deléitate con pollo tierno y jugoso, preparado con especias que realzan su sabor natural</p>
+                    <button class="card-button">Ver más</button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="front-page4">
+                <div class="card-info">
+                    <p class="card-subtitulo">Papas</p>
+                </div>
+            </div>
+            <div class="back-page">
+                <div class="card-content">
+                    <p>Prueba nuestras papas doradas y crujientes, ideales como complemento perfecto</p>
+                    <button class="card-button">Ver más</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="video-btn-container">
+        <video class="video-fondo" muted loop playsinline>
+            <source src="Icon/AI Burger Commercial (online-video-cutter.com).mp4" type="video/mp4">
+        </video>
+        <button class="ver-mas-btn">Ver menú completo</button><br>
+    </div>
+
+    <div id="contenedorResenas" class="bg-gray-100 py-10 px-4">
+        <div class="max-w-7xl mx-auto relative">
+            <h2 class="text-2xl font-bold text-center mb-6">Reseñas destacadas</h2>
+
+    <!-- Carrusel -->
+        <div id="carruselResenas" class="carrusel flex gap-4 no-scrollbar px-10">
+      <!-- Críticas se agregarán dinámicamente aquí -->
+        </div>
+
+        <div class="text-center mt-8">
+            <button onclick="abrirFormularioComentario()" class="bg-red-600 text-white px-6 py-2 rounded-full shadow hover:bg-gray-700">Agregar Comentario</button>
+      
+      <!-- Modal de comentario con texto negro -->
+        <div id="modalComentario" class="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 flex justify-center items-center hidden z-50">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full text-black">
+                <h3 class="text-lg font-bold mb-8">Agregar nuevo comentario</h3>
+          
+          <!-- Nombre -->
+            <input id="nombreCritico" type="text" placeholder="Nombre del crítico" class="w-full mb-2 p-2 border rounded bg-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-black" />
+          
+          <!-- Medio (select) -->
+            <select id="medioCritico" class="w-full mb-2 p-2 border rounded bg-white dark:bg-gray-700 dark:border-gray-600 text-black">
+                <option value="">Selecciona un aspecto</option>
+                <option value="comida">Comida</option>
+                <option value="atencion">Atención</option>
+                <option value="tiempo de espera">Tiempo de espera</option>
+                <option value="ambiente">Ambiente</option>
+            </select>
+          
+          <!-- Comentario -->
+            <textarea id="textoComentario" placeholder="Tu comentario" class="w-full mb-2 p-2 border rounded bg-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-black"></textarea>
+          
+          <!-- Puntuación (select) -->
+            <select id="puntuacion" class="wshe w-full mb-4 p-2 border rounded bg-white dark:bg-gray-700 dark:border-gray-600 text-black">
+                <option value="">Selecciona puntuación</option>
+                <option value="1/5">1/5</option>
+                <option value="2/5">2/5</option>
+                <option value="3/5">3/5</option>
+                <option value="4/5">4/5</option>
+                <option value="5/5">5/5</option>
+            </select>
+
+          <!-- Botones -->
+            <div class="flex justify-end gap-2">
+                <button onclick="cerrarFormularioComentario()" class="bg-blue-600 text-black px-4 py-2 rounded hover:bg-gray-700">
+                Cancelar
+                </button>
+                <button onclick="agregarComentario()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-gray-700">
+                Agregar
+                </button>
+            </div>
+            </div>
+        </div>
+        </div>
+
+            <!-- Botón izquierdo (<) -->
+            <button onclick="anterior()" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 border border-gray-300 p-3 rounded-full text-2xl shadow hover:bg-gray-200 z-10">
+            < </button>
+
+            <!-- Botón derecho (>) -->
+            <button onclick="siguiente()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 border border-gray-300 p-3 rounded-full text-2xl shadow hover:bg-gray-200 z-10">
+            > </button>
+        </div>
+    </div>
+
+  <link rel="stylesheet"
+    href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <df-messenger location="us-central1" project-id="crucial-zodiac-473802-s9"
+    agent-id="00a83e9b-4e83-4fe3-892e-a68752476da6" language-code="es" max-query-length="-1">
+    <df-messenger-chat-bubble intent="WELCOME"
+  chat-title="Veronica"
+  agent-id="7f353333-e840-4873-bf23-96a445ce0df4"
+  language-code="es"
+  chat-icon="Icon/hamburguesa-chatbot.png">
+    </df-messenger-chat-bubble>
+  </df-messenger>
+  <style>
+    df-messenger {
+      z-index: 999;
+      position: fixed;
+      /* Los estilos de posición inicial ya no son tan importantes por la animación */
+      bottom: 16px;
+      right: 16px;
+      /* Adaptación de colores cálidos para el CHAT ABIERTO */
+      --df-messenger-font-color: #333;
+      /* Texto oscuro profesional */
+      --df-messenger-font-family: Arial, sans-serif;
+      --df-messenger-chat-background: #fff8f5;
+      /* Fondo del chat muy claro/crema */
+      --df-messenger-message-user-background: #ffdbbf;
+      /* Burbuja del usuario color terracota suave */
+      --df-messenger-message-bot-background: #f7f7f7;
+      /* Burbuja del bot gris claro */
+    }
+
+    /* Estilos para la BURBUJA DE CHAT (Botón Cerrado) */
+    df-messenger-chat-bubble {
+      /* Colores cálidos y profesionales */
+      --df-messenger-chat-bubble-background: linear-gradient(135deg, #4b4844 0%, #ffffff 100%) !important;
+      /* Degradado Naranja/Dorado */
+      --df-messenger-chat-bubble-font-color: white !important;
+      border-radius: 50% !important;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      /* Sombra elegante */
+      transition: transform 0.3s ease;
+
+      /* *ANIMACIÓN DE MOVIMIENTO DINÁMICO* */
+      animation: floatOrbit 20s ease-in-out infinite alternate;
+      /* Mueve el botón lentamente */
+      /* Mantiene el botón dentro de la vista */
+      transform: translate(0, 0);
+      position: relative;
+      /* Necesario para que la animación de movimiento funcione bien */
+    }
+
+    /* Definición de la animación: Mover el botón en un área grande */
+    @keyframes floatOrbit {
+      0% {
+        transform: translate(0, 0) scale(1);
+        /* Posición inicial: Abajo-Derecha */
+        opacity: 1;
+      }
+
+      25% {
+        transform: translate(-80vw, -70vh) scale(1.05);
+        /* Se mueve hacia Arriba-Izquierda */
+        opacity: 0.95;
+      }
+
+      50% {
+        transform: translate(-10vw, -80vh) scale(1);
+        /* Se mueve hacia Arriba-Derecha */
+        opacity: 1;
+      }
+
+      75% {
+        transform: translate(-90vw, -10vh) scale(0.95);
+        /* Se mueve hacia Abajo-Izquierda */
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1);
+        /* Regresa a la posición inicial */
+        opacity: 1;
+      }
+    }
+    /* Efecto al pasar el mouse: Detiene la animación para que sea fácil hacer clic */
+    df-messenger-chat-bubble:hover {
+      transform: scale(1.1) !important;
+      /* Más grande al pasar el mouse */
+      animation: none !important;
+      /* *Importante: Detiene el movimiento al pasar el cursor* */
+      box-shadow: 0 6px 15px rgba(255, 102, 0, 0.5);
+      /* Sombra del color de la marca */
+    }
+    /* Estilos para el widget de Dialogflow Messenger */
+df-messenger {
+  --df-messenger-button-titlebar-color: var(--color-secundario); /* Rojo para la barra de título */
+  --df-messenger-button-titlebar-font-color: #ffffff; /* Texto blanco en la barra */
+  --df-messenger-chat-background-color: #f9fafb; /* Fondo gris claro para la ventana */
+  --df-messenger-font-color: #000000; /* Texto negro para mensajes */
+  --df-messenger-send-icon: var(--color-secundario); /* Icono de enviar en rojo */
+}
+  </style>
+
+    <footer>
+    <div class="footer-contenedor contenedor">
+        <!-- Sección 1: Contacto -->
+        <div class="footer-seccion contacto" id="contacto">
+          <h3>Contacto</h3>
+          <div class="footer-info">
+            <p><strong>Correo:</strong></p>
+            <div class="linea-info">
+              <img src="Icon/correo.png" alt="" class="icono">
+              <a href="mailto:larutadelsaborrestaurante@gmail.com">larutadelsaborrestaurante@gmail.com</a>
+            </div>
+            <div class="linea-info">
+              <img src="Icon/correo.png" alt="" class="icono">
+              <span>pedidoslarutadelsabor@gmail.com</span>
+            </div>
+            <p><strong>Teléfonos:</strong></p>
+            <div class="linea-info">
+              <img src="Icon/telefono.png" alt="" class="icono">
+              <span>+51 974 478 045</span>
+            </div>
+            <div class="linea-info">
+              <img src="Icon/telefono.png" alt="" class="icono">
+              <span>+51 (01) 746-6817</span>
+            </div>
+          </div>
+        </div>
+        <!-- Sección 2: Atención al Cliente -->
+        <div class="footer-seccion cliente">
+          <h3>Atención al Cliente</h3>
+          <div class="footer-info">
+            <p><strong>Dirección:</strong></p>
+            <div class="linea-info">
+              <img src="Icon/direccion.png" alt="" class="icono">
+              <span>MegaPlaza Ica, Av de los Maestros, Ica</span>
+            </div>
+            <p><strong>Formas de pago:</strong></p>
+            <div class="linea-info">
+              <img src="Icon/tarjeta.png" alt="" class="icono">
+              <span>Tarjetas</span>
+            </div>
+            <div class="linea-info">
+              <img src="Icon/efectivo.png" alt="" class="icono">
+              <span>Efectivo</span>
+            </div>
+            <div class="linea-info">
+              <img src="Icon/yape_plin.png" alt="" class="icono">
+              <span>Yape o Plin</span>
+            </div>
+          </div>
+        </div>
+        <!-- Sección 3: Sobre Nosotros -->
+        <div class="footer-seccion">
+          <h3>Sobre Nosotros</h3>
+          <ul>
+            <li><a href="Nosotros.html">Nosotros</a></li>
+            <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+          </ul>
+        </div>
+        <!-- Sección 4: Horario -->
+       <div class="footer-seccion">
+          <h3>Horario de Atención</h3>
+          <div class="footer-info">
+          <table class="contacto-tabla">
+          <thead>
+          <tr>
+          <th>Días</th>
+          <th>Horas</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+          <td>Lunes a Sábado</td>
+          <td>11:00 am - 10:00 pm</td>
+          </tr>
+          <tr>
+          <td>Domingos y Feriados</td>
+          <td>11:00 am - 05:00 pm</td>
+          </tr>
+          </tbody>
+        </table>
+  </div>
+</div>
+    </div>
+    <div class="footer-redes">
+        <a href="https://facebook.com" target="_blank" class="social-link">
+            <img src="icon/Redes/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-link">
+            <img src="icon/Redes/instagram.svg" alt="Instagram" class="instagram">
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="social-link">
+            <img src="icon/Redes/tiktok.svg" alt="TikTok" class="tiktok">
+        </a>
+    </div>
+        <!-- Línea blanca -->
+      <hr class="footer-linea" />
+      <p class="footer-copy">© 2025 Restaurant La Ruta del Sabor. Todos los derechos reservados.</p>
+    </footer>
+
+    <div class="bottom-nav">
+      <a href="index.html">
+        <span><img src="Icon/InicioM (1).png" alt=""></span>
+        <p>Inicio</p>
+      </a>
+      <a href="menu.html">
+        <span><img src="Icon/Menu.png" alt=""></span>
+        <p>Menú</p>
+      </a>
+      <a href="Nosotros.html">
+        <span><img src="Icon/Nosotros.png" alt=""></span>
+        <p>Nosotros</p>
+      </a>
+      <a href="index.html#contacto">
+        <span><img src="Icon/telefono.png" alt=""></span>
+        <p>Contactos</p>
+      </a>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>

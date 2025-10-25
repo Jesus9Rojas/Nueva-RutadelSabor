@@ -1,0 +1,111 @@
+[
+  {
+    "_id": "685c9f4a0aad2faf44ec3089",
+    "nombre": "Administrador",
+    "email": "test@test.com",
+    "password": "$2b$10$XfUZmhUuTTNE81GPauyVhOBnInI2elOz.TdSRIc33d9L0FdZVCwzu",
+    "rol": "admin",
+    "createdAt": 1750900554366,
+    "__v": 0
+  },
+  {
+    "_id": "685dc5ecb3c4ad41ef6c3350",
+    "nombre": "Gabriel Yllescas",
+    "email": "gabaledan@gmail.com",
+    "password": "$2b$10$D07cTkd5HmIk5bYwYHTrYOjStPS8zxenqoMx1usazIN.nmcyJDDTm",
+    "rol": "usuario",
+    "createdAt": 1750975980339,
+    "__v": 0
+  },
+  {
+    "_id": "685e9b79f18b08d19e5c2912",
+    "nombre": "Daniel Romaní",
+    "email": "qa@no.bbb",
+    "password": "$2b$10$7eo/Qi1XB2u8crb/KkfmpOGu66Kd1BQo0oXR8QROVtWrl7EP8Hy9a",
+    "rol": "usuario",
+    "createdAt": 1751030649287,
+    "__v": 0
+  },
+  {
+    "_id": "6860701daca3b1c54d216081",
+    "nombre": "Luis Sullca",
+    "email": "a@no.nos",
+    "password": "$2b$10$ugSltP1melishcukDDlVX.QQ3MWDGy0n0MqDJqr9yIpS5FPgO3/gu",
+    "rol": "usuario",
+    "createdAt": 1751150621939,
+    "__v": 0
+  },
+  {
+    "_id": "68607105aca3b1c54d216092",
+    "nombre": "Darikson González",
+    "email": "a@no.nas",
+    "password": "$2b$10$frIdV70XuOHbxvyyJiCB.OAytAMPh0XqtHPkYCozsdlJX/PJ610g.",
+    "rol": "usuario",
+    "createdAt": 1751150853847,
+    "__v": 0
+  },
+  {
+    "_id": "686459d0e30d14244a18be8c",
+    "nombre": "Ricardo Plaza Herrera",
+    "email": "ricardoplazaxdd@gmail.com",
+    "password": "$2b$10$yIrYPzfZcmmkaRmifJkl0OY2f2CgzHsc/SQRAs6kbrm21/2viLe1q",
+    "rol": "usuario",
+    "createdAt": 1751407056816,
+    "__v": 0
+  },
+  {
+    "_id": "6864ad550968d8021504c6ad",
+    "nombre": "Leandro Lean",
+    "email": "estebanrodrigoleandro@gmail.com",
+    "password": "$2b$10$iQDcPGVzxak0K37BOdwT8.CQWqZ6GlnCXnDvSLXB8Me1RgPUnavDy",
+    "rol": "usuario",
+    "createdAt": 1751428437410,
+    "__v": 0
+  },
+  {
+    "_id": "68655bd67c098fc74802c114",
+    "nombre": "Ulises Yllescas",
+    "email": "gabriel@gmai.com",
+    "password": "$2b$10$NmvjOg8oCmBnE4k9uSYGmulcZte3.uqEG5fj8xc0UnwyMNHayLfbG",
+    "rol": "usuario",
+    "createdAt": 1751473110548,
+    "__v": 0
+  },
+  {
+    "_id": "68655dd67c098fc74802c155",
+    "nombre": "Jesus Rojas",
+    "email": "jesus@gmail.com",
+    "password": "$2b$10$.BYJvNQ14FGswh9yXimjWusdEyGz.T5MLxOm8nJNkfTjx4svPsz3G",
+    "rol": "usuario",
+    "createdAt": 1751473622574,
+    "__v": 0
+  },
+  {
+    "_id": "686e75905e03fcd52ff6d328",
+    "nombre": "Ariel Mendoza",
+    "email": "ariel@gmail.com",
+    "password": "$2b$10$ht2W9YD0I.Wi4ItoYxYrx.E3qPLOFG0DPavMn6V.JmaznVPohsFum",
+    "rol": "usuario",
+    "createdAt": 1752069520630,
+    "__v": 0
+  },
+  {
+    "_id": "686f4f8e9df20024a06bf1c0",
+    "nombre": "Alessandro Yllescas",
+    "email": "alesso@gmail.com",
+    "password": "$2b$10$a6v8Am9t4HTcRTFNfOsuNe.yn3WJnK.79gWqUGcPzLrmJzKeBoMe2",
+    "rol": "usuario",
+    "createdAt": 1752125326973,
+    "__v": 0
+  },
+  {
+    "_id": "6870a9f176793e5c853dcff6",
+    "nombre": "Jules Lino",
+    "email": "elvergalarga@gmail.com",
+    "password": "$2b$10$9Cf8hQqP76QuebnHYl9Axe3YlsmLnvxl5lOespLCfkFnkGgnD3blS",
+    "rol": "usuario",
+    "createdAt": 1752214001713,
+    "__v": 0
+  },
+  {"_id":"687100ca23f91c1ae6fab87d","nombre":"Juaan Lookmaan","email":"lookjuan@gmail.com","password":"$2b$10$LnddgGcU7/brBi./hnjUcOeK0XpGogvtV14iKTvO9csvEQ1CYMKOu","rol":"usuario","createdAt":{"$date":{"$numberLong":"1752236234686"}},"__v":{"$numberInt":"0"}}
+]

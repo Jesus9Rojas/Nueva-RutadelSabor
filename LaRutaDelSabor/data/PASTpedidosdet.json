@@ -1,0 +1,46 @@
+[
+  {
+    "id_detalle": 1,
+    "id_pedido": 1,
+    "id_producto": 1,
+    "cantidad": 2,
+    "subtotal": 25.00,
+    "producto": {
+      "nombre": "Hamburguesa Clásica",
+      "precio": 12.50
+    }
+  },
+  {
+    "id_detalle": 2,
+    "id_pedido": 1,
+    "id_producto": 7,
+    "cantidad": 1,
+    "subtotal": 16.00,
+    "producto": {
+      "nombre": "Hamburguesa Especial",
+      "precio": 16.00
+    }
+  },
+  {
+    "id_detalle": 3,
+    "id_pedido": 2,
+    "id_producto": 3,
+    "cantidad": 1,
+    "subtotal": 13.00,
+    "producto": {
+      "nombre": "Hamburguesa con Queso",
+      "precio": 13.00
+    }
+  },
+  {
+    "id_detalle": 4,
+    "id_pedido": 2,
+    "id_producto": 6,
+    "cantidad": 1,
+    "subtotal": 14.00,
+    "producto": {
+      "nombre": "Hamburguesa con Tocino",
+      "precio": 14.00
+    }
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4d51" },
+    "tipo_comprobante": "Boleta"
+  },
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4d52" },
+    "tipo_comprobante": "Factura"
+  }
+]

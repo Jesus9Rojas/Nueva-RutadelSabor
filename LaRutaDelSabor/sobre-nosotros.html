@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Ruta del Sabor</title>
+    <link rel="shortcut icon" href="icon/logo.png" type="image/png">
+    <link rel="stylesheet" href="css/sobre-nosotros.css">
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    renderAuthButtons();
+    });
+
+function renderAuthButtons() {
+    const authButtons = document.getElementById('botones-autenticacion');
+    const user = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
+    
+    authButtons.innerHTML = '';
+
+    if (token && user && user.email === 'test@test.com') {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="admin.html" class="admin-btn">
+                    <i class="bi bi-basket-fill"></i> Registrar Productos
+                </a>
+            </div>
+            <div class="registro">
+                <a href="#" onclick="logout()" class="admin-btn">
+                    <i class="bi bi-box-arrow-right"></i> Salir Modo Admin
+                </a>
+            </div>
+        `;
+    } else if (token && user) {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="#" onclick="logout()"><img src="Icon/cerrar-con-llave.png" alt="Carrito"></a>
+            </div>
+            <div class="carrito">
+                <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
+            </div>
+        `;
+    } else {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="login.html"><img src="Icon/iniciar_sesion.png" alt="Iniciar Sesión"></a>
+            </div>
+            <div class="carrito">
+                <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
+            </div>
+        `;
+    }
+}
+
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = 'index.html';
+}
+
+//Agrandamiento de las redes al abrir
+document.addEventListener("DOMContentLoaded", () => {
+    const socialLinks = document.querySelectorAll(".social-link");
+    const logo = document.querySelector(".logo-img");
+
+    // Efecto de explosión en las redes sociales
+    socialLinks.forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const icon = this.querySelector("img");
+            icon.classList.add("social-explode");
+
+            setTimeout(() => {
+                window.open(this.href, "_blank");
+                icon.classList.remove("social-explode");
+            }, 500);
+        });
+    });
+  });
+    </script>
+<body>
+
+    <header class="header">
+        <div class="contenedor">
+            <div class="barra">
+                <a class="logo" href="index.html">
+                    <img src="Icon/logo.png" alt="Logo" class="responsive-logo">
+                </a>
+
+                <nav class="navegacion">
+                    <a href="index.html" class="navegacion_enlace"><p class="p1">Inicio</p></a>
+                    <a href="menu.html" class="navegacion_enlace"><p>Menú</p></a>
+                    <a href="nosotros.html" class="navegacion_enlace"><p>Nosotros</p></a>
+                    <a href="index.html#contacto" class="navegacion_enlace"><p>Contactos</p></a>
+                </nav>
+                <div id="botones-autenticacion">
+                <!-- Botones dinámicos se insertarán aquí mediante JavaScript -->
+                <!-- Botones de iniciar sesion y carrito -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="sobre-nosotros">
+    <section class="intro">
+      <h1>¿Quiénes somos?</h1>
+      <p>
+        En <strong>La Ruta del Sabor</strong>, más que un restaurante, somos un rincón donde la comida y la pasión se encuentran.
+        Desde nuestros inicios, nos hemos dedicado a ofrecer experiencias sabrosas, caseras y con alma peruana.
+      </p>
+    </section>
+
+    <section class="mision-vision">
+        <div class="cuadro-info">
+        <h3>Misión</h3>
+        <p>
+      Brindar a cada cliente una comida rápida que conserve el sabor auténtico y casero, usando ingredientes frescos,
+      atención cálida y precios accesibles para toda la familia.
+        </p>
+        </div>
+    <div class="cuadro-info">
+        <h3>Visión</h3>
+        <p>
+      Convertirnos en el restaurante de referencia en el Perú, llevando nuestra propuesta culinaria a nuevas ciudades
+      sin perder nuestra esencia artesanal.
+        </p>
+    </div>
+    </section>
+
+    <section class="valores">
+      <h2>Valores que nos definen</h2>
+      <ul>
+        <li><strong>Pasión por lo que hacemos:</strong> Cada plato está preparado con amor y orgullo.</li>
+        <li><strong>Compromiso con la calidad:</strong> Desde nuestros insumos hasta el servicio.</li>
+        <li><strong>Respeto a nuestros clientes:</strong> Ellos son el corazón de nuestra familia.</li>
+        <li><strong>Trabajo en equipo:</strong> Crecemos juntos, cada día.</li>
+      </ul>
+    </section>
+  </main>
+
+    <footer>
+     <div class="footer-redes">
+        <a href="https://facebook.com" target="_blank" class="social-link">
+            <img src="icon/Redes/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-link">
+            <img src="icon/Redes/instagram.svg" alt="Instagram" class="instagram">
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="social-link">
+            <img src="icon/Redes/tiktok.svg" alt="TikTok" class="tiktok">
+        </a>
+    </div>
+        <!-- Línea blanca -->
+      <hr class="footer-linea" />
+      <p class="footer-copy">© 2025 Restaurant La Ruta del Sabor. Todos los derechos reservados.</p>
+    </footer>
+    
+    <div class="bottom-nav">
+      <a href="index.html">
+        <span><img src="Icon/InicioM (1).png" alt=""></span>
+        <p>Inicio</p>
+      </a>
+      <a href="menu.html">
+        <span><img src="Icon/Menu.png" alt=""></span>
+        <p>Menú</p>
+      </a>
+      <a href="Nosotros.html">
+        <span><img src="Icon/Nosotros.png" alt=""></span>
+        <p>Nosotros</p>
+      </a>
+      <a href="index.html#contacto">
+        <span><img src="Icon/telefono.png" alt=""></span>
+        <p>Contactos</p>
+      </a>
+    </div>
+
+</body>
+</html>

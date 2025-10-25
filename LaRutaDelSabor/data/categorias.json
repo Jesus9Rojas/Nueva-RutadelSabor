@@ -1,0 +1,17 @@
+[
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4e01" },
+    "categoria": "Hamburguesas",
+    "icono": "🍔"
+  },
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4e02" },
+    "categoria": "Alitas",
+    "icono": "🍗"
+  },
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4e03" },
+    "categoria": "Pollo",
+    "icono": "🐔"
+  }
+]

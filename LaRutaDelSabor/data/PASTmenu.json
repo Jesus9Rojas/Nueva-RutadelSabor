@@ -1,0 +1,434 @@
+[
+    {
+        "categoria": "Hamburguesas",
+        "icono": "🍔",
+        "productos": [
+            {
+                "nombre": "Hamburguesa Clásica",
+                "precio": 12.50,
+                "imagen": "Icon/Hamburguesas/hamburguesa1.jpg",
+                "descripcion": "Pan artesanal, carne 100% res, lechuga, tomate y salsas."
+            },
+            {
+                "nombre": "Hamburguesa Criolla",
+                "precio": 11.90,
+                "imagen": "Icon/Hamburguesas/hamburguesa2.jpg",
+                "descripcion": "Carne de res, plátano frito, huevo y salsa criolla."
+            },
+            {
+                "nombre": "Hamburguesa con Queso",
+                "precio": 13.00,
+                "imagen": "Icon/Hamburguesas/hamburguesa3.jpg",
+                "descripcion": "Carne jugosa, queso derretido, lechuga y tomate."
+            },
+            {
+                "nombre": "Hamburguesa Doble Carne",
+                "precio": 15.00,
+                "imagen": "Icon/Hamburguesas/hamburguesa4.jpg",
+                "descripcion": "Doble porción de carne, queso, lechuga y tomate."
+            },
+            {
+                "nombre": "Hamburguesa con Huevo",
+                "precio": 13.50,
+                "imagen": "Icon/Hamburguesas/hamburguesa5.jpg",
+                "descripcion": "Carne, huevo frito, lechuga y salsa especial."
+            },
+            {
+                "nombre": "Hamburguesa con Tocino",
+                "precio": 14.00,
+                "imagen": "Icon/Hamburguesas/hamburguesa6.jpg",
+                "descripcion": "Carne, tocino crujiente, lechuga y tomate."
+            },
+            {
+                "nombre": "Hamburguesa Especial",
+                "precio": 16.00,
+                "imagen": "Icon/Hamburguesas/hamburguesa7.jpg",
+                "descripcion": "Carne, queso azul, cebolla caramelizada y salsa BBQ."
+            }
+        ]
+    },
+    {
+        "categoria": "Alitas",
+        "icono": "🍗",
+        "productos": [
+            {
+                "nombre": "Alitas BBQ",
+                "precio": 11.00,
+                "imagen": "Icon/Alitas/alitas1.jpg",
+                "descripcion": "Alitas de pollo bañadas en salsa BBQ."
+            },
+            {
+                "nombre": "Alitas Buffalo",
+                "precio": 11.50,
+                "imagen": "Icon/Alitas/alitas2.jpg",
+                "descripcion": "Alitas de pollo con salsa picante estilo Buffalo."
+            },
+            {
+                "nombre": "Alitas Picantes",
+                "precio": 12.00,
+                "imagen": "Icon/Alitas/alitas3.jpg",
+                "descripcion": "Alitas de pollo con salsa picante especial."
+            },
+            {
+                "nombre": "Alitas con Miel",
+                "precio": 11.80,
+                "imagen": "Icon/Alitas/alitas4.jpg",
+                "descripcion": "Alitas de pollo con salsa de miel y mostaza."
+            },
+            {
+                "nombre": "Alitas a la Parrilla",
+                "precio": 12.50,
+                "imagen": "Icon/Alitas/alitas5.jpg",
+                "descripcion": "Alitas de pollo asadas a la parrilla con especias."
+            },
+            {
+                "nombre": "Alitas Oriental",
+                "precio": 13.00,
+                "imagen": "Icon/Alitas/alitas6.jpg",
+                "descripcion": "Alitas de pollo con salsa oriental agridulce."
+            },
+            {
+                "nombre": "Alitas Fritas Crocantes",
+                "precio": 11.20,
+                "imagen": "Icon/Alitas/alitas7.jpg",
+                "descripcion": "Alitas de pollo fritas, crujientes y doradas."
+            }
+        ]
+    },
+    {
+        "categoria": "Pollo",
+        "icono": "🐔",
+        "productos": [
+            {
+                "nombre": "Pollo Broaster",
+                "precio": 10.50,
+                "imagen": "Icon/Pollo/pollo1.jpg",
+                "descripcion": "Pollo frito estilo broaster, crujiente por fuera y jugoso por dentro."
+            },
+            {
+                "nombre": "Salchipollo",
+                "precio": 10.50,
+                "imagen": "Icon/Pollo/pollo2.jpg",
+                "descripcion": "Pollo frito con salchicha, acompañado de papas fritas."
+            },
+            {
+                "nombre": "Filete a la Plancha",
+                "precio": 9.50,
+                "imagen": "Icon/Pollo/pollo3.jpg",
+                "descripcion": "Filete de pollo a la plancha, sazonado al gusto."
+            },
+            {
+                "nombre": "Filete Apanado",
+                "precio": 9.90,
+                "imagen": "Icon/Pollo/pollo4.jpg",
+                "descripcion": "Filete de pollo empanizado y frito, crujiente por fuera."
+            },
+            {
+                "nombre": "Dedidos Crispy",
+                "precio": 11.00,
+                "imagen": "Icon/Pollo/pollo5.jpg",
+                "descripcion": "Dedos de pollo empanizados y fritos, perfectos para compartir."
+            },
+            {
+                "nombre": "Nuggets",
+                "precio": 8.50,
+                "imagen": "Icon/Pollo/pollo6.jpg",
+                "descripcion": "Nuggets de pollo empanizados, crujientes y jugosos."
+            },
+            {
+                "nombre": "Muslitos BBQ",
+                "precio": 10.00,
+                "imagen": "Icon/Pollo/pollo7.jpg",
+                "descripcion": "Muslitos de pollo marinados y asados con salsa BBQ."
+            }
+        ]
+    },
+    {
+        "categoria": "Papas",
+        "icono": "🍟",
+        "productos": [
+            {
+                "nombre": "Papas Clásicas",
+                "precio": 6.00,
+                "imagen": "Icon/Papas/papas1.jpg",
+                "descripcion": "Papas fritas clásicas, crujientes y doradas."
+            },
+            {
+                "nombre": "Papas Rústicas",
+                "precio": 6.50,
+                "imagen": "Icon/Papas/papas2.jpg",
+                "descripcion": "Papas fritas con piel, sazonadas al gusto."
+            },
+            {
+                "nombre": "Papas con Queso",
+                "precio": 7.50,
+                "imagen": "Icon/Papas/papas3.jpg",
+                "descripcion": "Papas fritas con queso derretido y salsas."
+            },
+            {
+                "nombre": "Papas con Tocino",
+                "precio": 8.00,
+                "imagen": "Icon/Papas/papas4.jpg",
+                "descripcion": "Papas fritas con trozos de tocino y salsas."
+            },
+            {
+                "nombre": "Papas con Queso y Tocino",
+                "precio": 8.50,
+                "imagen": "Icon/Papas/papas5.jpg",
+                "descripcion": "Papas fritas con queso derretido y trozos de tocino."
+            },
+            {
+                "nombre": "Salchipapa",
+                "precio": 9.50,
+                "imagen": "Icon/Papas/papas6.jpg",
+                "descripcion": "Papas fritas con salchicha y salsas al gusto."
+            },
+            {
+                "nombre": "Papas Trufadas",
+                "precio": 9.00,
+                "imagen": "Icon/Papas/papas7.jpg",
+                "descripcion": "Papas fritas con aceite de trufa y queso parmesano."
+            }
+        ]
+    },
+    {
+        "categoria": "Light",
+        "icono": "🥗",
+        "productos": [
+            {
+                "nombre": "Ensalada César",
+                "precio": 9.50,
+                "imagen": "Icon/Light/ensalada1.jpg",
+                "descripcion": "Ensalada César con pollo, lechuga, crutones y aderezo César."
+            },
+            {
+                "nombre": "Ensalada Mixta",
+                "precio": 8.50,
+                "imagen": "Icon/Light/ensalada2.jpg",
+                "descripcion": "Ensalada fresca con lechuga, tomate, pepino y aderezo."
+            },
+            {
+                "nombre": "Wrap de Pollo Light",
+                "precio": 10.00,
+                "imagen": "Icon/Light/ensalada3.jpg",
+                "descripcion": "Wrap de pollo con vegetales frescos envuelto en tortilla integral."
+            },
+            {
+                "nombre": "Croquetas de Atún",
+                "precio": 9.80,
+                "imagen": "Icon/Light/ensalada4.jpg",
+                "descripcion": "Deliciosas croquetas de atún con ensalada fresca."
+            },
+            {
+                "nombre": "Yogurt con Granola",
+                "precio": 6.50,
+                "imagen": "Icon/Light/ensalada5.jpg",
+                "descripcion": "Yogurt natural con granola y frutas frescas."
+            },
+            {
+                "nombre": "Fruta Mixta",
+                "precio": 7.00,
+                "imagen": "Icon/Light/ensalada6.jpg",
+                "descripcion": "Ensalada de frutas frescas de temporada."
+            },
+            {
+                "nombre": "Sándwich Integral",
+                "precio": 8.00,
+                "imagen": "Icon/Light/ensalada7.jpg",
+                "descripcion": "Sándwich integral con pollo, lechuga y tomate."
+            }
+        ]
+    },
+    {
+        "categoria": "Postres",
+        "icono": "🧁",
+        "productos": [
+            {
+                "nombre": "Dona glaseada",
+                "precio": 3.50,
+                "imagen": "Icon/Donas/dona1.jpg",
+                "descripcion": "Dona glaseada clásica."
+            },
+            {
+                "nombre": "Dona de Chocolate",
+                "precio": 4.20,
+                "imagen": "Icon/Donas/dona2.jpg",
+                "descripcion": "Dona suave con cobertura de chocolate."
+            },
+            {
+                "nombre": "Dona rellena de Manjar",
+                "precio": 4.50,
+                "imagen": "Icon/Donas/dona3.jpg",
+                "descripcion": "Dona suave rellena de manjar blanco."
+            },
+            {
+                "nombre": "Doble Chocolate",
+                "precio": 4.80,
+                "imagen": "Icon/Donas/dona4.jpg",
+                "descripcion": "Dona con doble cobertura de chocolate."
+            },
+            {
+                "nombre": "Dona de Fresa",
+                "precio": 4.30,
+                "imagen": "Icon/Donas/dona5.jpg",
+                "descripcion": "Dona glaseada con sabor a fresa."
+            },
+            {
+                "nombre": "Dona Arcoíris",
+                "precio": 4.70,
+                "imagen": "Icon/Donas/dona6.jpg",
+                "descripcion": "Dona colorida con glaseado de varios sabores."
+            },
+            {
+                "nombre": "Mini Donas",
+                "precio": 6.00,
+                "imagen": "Icon/Donas/dona7.jpg",
+                "descripcion": "Mini donas variadas, perfectas para compartir."
+            }
+        ]
+    },
+    {
+        "categoria": "Refrescos",
+        "icono": "🥤",
+        "productos": [
+            {
+                "nombre": "Refresco de Maracuyá",
+                "precio": 3.50,
+                "imagen": "Icon/Refrescos/refresco1.jpg",
+                "descripcion": "Refresco natural de maracuyá, refrescante y delicioso."
+            },
+            {
+                "nombre": "Chicha Morada",
+                "precio": 3.50,
+                "imagen": "Icon/Refrescos/refresco2.jpg",
+                "descripcion": "Chicha morada refrescante, hecha con maíz morado."
+            },
+            {
+                "nombre": "Limonada",
+                "precio": 3.80,
+                "imagen": "Icon/Refrescos/refresco3.jpg",
+                "descripcion": "Limonada fresca, ideal para el calor."
+            },
+            {
+                "nombre": "Agua Mineral",
+                "precio": 2.00,
+                "imagen": "Icon/Refrescos/refresco4.jpg",
+                "descripcion": "Agua mineral natural, refrescante y saludable."
+            },
+            {
+                "nombre": "Gaseosa Personal",
+                "precio": 3.00,
+                "imagen": "Icon/Refrescos/refresco5.jpg",
+                "descripcion": "Gaseosa en lata, ideal para acompañar tus comidas."
+            },
+            {
+                "nombre": "Té Helado",
+                "precio": 3.50,
+                "imagen": "Icon/Refrescos/refresco6.jpg",
+                "descripcion": "Té helado refrescante, ideal para el calor."
+            },
+            {
+                "nombre": "Refresco de Mango",
+                "precio": 4.00,
+                "imagen": "Icon/Refrescos/refresco7.jpg",
+                "descripcion": "Refresco natural de mango, refrescante y delicioso."
+            }
+        ]
+    },
+    {
+        "categoria": "Cremas y Salsas",
+        "icono": "🧂",
+        "productos": [
+            {
+                "nombre": "Mayonesa",
+                "precio": 0,
+                "imagen": "Icon/Cremas/crema1.jpg",
+                "descripcion": "Mayonesa casera, ideal para acompañar."
+            },
+            {
+                "nombre": "Kétchup",
+                "precio": 0,
+                "imagen": "Icon/Cremas/crema2.jpg",
+                "descripcion": "Kétchup clásico, ideal para acompañar."
+            },
+            {
+                "nombre": "Mostaza",
+                "precio": 0,
+                "imagen": "Icon/Cremas/crema3.jpg",
+                "descripcion": "Mostaza clásica, ideal para acompañar."
+            },
+            {
+                "nombre": "Ají Pollero",
+                "precio": 0,
+                "imagen": "Icon/Cremas/crema4.jpg",
+                "descripcion": "Ají pollero casero, ideal para acompañar."
+            },
+            {
+                "nombre": "Salsa de Queso",
+                "precio": 0.50,
+                "imagen": "Icon/Cremas/crema5.jpg",
+                "descripcion": "Salsa de queso cheddar cremosa."
+            },
+            {
+                "nombre": "Tártara",
+                "precio": 0.50,
+                "imagen": "Icon/Cremas/crema6.jpg",
+                "descripcion": "Salsa tártara con pepinillos y alcaparras."
+            },
+            {
+                "nombre": "Crema Huancaína",
+                "precio": 0.50,
+                "imagen": "Icon/Cremas/crema7.jpg",
+                "descripcion": "Crema de ají amarillo con queso fresco."
+            }
+        ]
+    },
+    {
+        "categoria": "Combos",
+        "icono": "📦",
+        "productos": [
+            {
+                "nombre": "Combo Clásico",
+                "precio": 18.00,
+                "imagen": "Icon/Combos/combo1.jpg",
+                "descripcion": "Hamburguesa clásica, papas fritas y bebida."
+            },
+            {
+                "nombre": "Combo 2 Hamburguesas",
+                "precio": 30.00,
+                "imagen": "Icon/Combos/combo2.jpg",
+                "descripcion": "2 hamburguesas, 2 papas fritas y 2 bebidas."
+            },
+            {
+                "nombre": "Combo Alitas",
+                "precio": 16.00,
+                "imagen": "Icon/Combos/combo3.jpg",
+                "descripcion": "Alitas BBQ, papas fritas y bebida."
+            },
+            {
+                "nombre": "Combo Broaster Clásico",
+                "precio": 24.00,
+                "imagen": "Icon/Combos/combo4.jpg",
+                "descripcion": "Pollo broaster, arroz y ensalada."
+            },
+            {
+                "nombre": "Combo Infantil",
+                "precio": 15.00,
+                "imagen": "Icon/Combos/combo5.jpg",
+                "descripcion": "Hamburguesa pequeña, papas fritas y bebida infantil."
+            },
+            {
+                "nombre": "Combo Hamburguesa BBQ",
+                "precio": 20.00,
+                "imagen": "Icon/Combos/combo6.jpg",
+                "descripcion": "Hamburguesa BBQ, papas fritas y bebida."
+            },
+            {
+                "nombre": "Combo Vegano Light",
+                "precio": 15.00,
+                "imagen": "Icon/Combos/combo7.jpg",
+                "descripcion": "Hamburguesa vegana, papas rústicas y bebida vegana."
+            }
+        ]
+    }
+]

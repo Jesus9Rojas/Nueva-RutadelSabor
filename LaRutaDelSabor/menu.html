@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Completo - La Ruta del Sabor</title>
+    <link rel="shortcut icon" href="icon/logo.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+    <header class="header">
+        <div class="contenedor">
+            <div class="barra">
+                <a class="logo" href="index.html">
+                    <img src="Icon/logo.png" alt="Logo" class="responsive-logo">
+                </a>
+
+                <nav class="navegacion">
+                    <a href="index.html" class="navegacion_enlace"><p class="p1">Inicio</p></a>
+                    <a href="menu.html" class="navegacion_enlace"><p>Menú</p></a>
+                    <a href="nosotros.html" class="navegacion_enlace"><p>Nosotros</p></a>
+                    <a href="index.html#contacto" class="navegacion_enlace"><p>Contactos</p></a>
+                </nav>
+                <div id="botones-autenticacion">
+                <!-- Botones dinámicos se insertarán aquí mediante JavaScript -->
+                <!-- Botones de iniciar sesion y carrito -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Botón toggle para categorías en móvil -->
+    <button class="menu-toggle" id="menu-toggle">Categorías</button>
+
+    <!-- Barra de navegación lateral para categorías -->
+    <nav class="sidebar" id="categorias-sidebar">
+        <ul id="categorias-list">
+            <!-- Aquí se generan los botones de categorías -->
+        </ul>
+    </nav>
+
+    <main id="productos-container">
+        <!-- Aquí se generan los productos -->
+    </main>
+
+    <div class="modal" id="modalProducto">
+        <div class="modal-content">
+            <img id="modalImg" src="" alt="" class="responsive-img">
+            <h4 id="modalNombre"></h4>
+            <p id="modalDesc"></p>
+            <p><strong>Precio: S/ <span id="modalPrecio"></span></strong></p>
+            <div class="modal-buttons">
+                <button class="btn-agregar" id="btnAgregar">➕ Agregar</button>
+                <button class="btn-salir" id="btnSalir">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+     <div class="footer-redes">
+        <a href="https://facebook.com" target="_blank" class="social-link">
+            <img src="icon/Redes/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-link">
+            <img src="icon/Redes/instagram.svg" alt="Instagram" class="instagram">
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="social-link">
+            <img src="icon/Redes/tiktok.svg" alt="TikTok" class="tiktok">
+        </a>
+    </div>
+        <!-- Línea blanca -->
+      <hr class="footer-linea" />
+      <p class="footer-copy">© 2025 Restaurant La Ruta del Sabor. Todos los derechos reservados.</p>
+    </footer>
+    
+    <div class="bottom-nav">
+      <a href="index.html">
+        <span><img src="Icon/InicioM (1).png" alt=""></span>
+        <p>Inicio</p>
+      </a>
+      <a href="menu.html">
+        <span><img src="Icon/Menu.png" alt=""></span>
+        <p>Menú</p>
+      </a>
+      <a href="Nosotros.html">
+        <span><img src="Icon/Nosotros.png" alt=""></span>
+        <p>Nosotros</p>
+      </a>
+      <a href="index.html#contacto">
+        <span><img src="Icon/telefono.png" alt=""></span>
+        <p>Contactos</p>
+      </a>
+    </div>
+
+    <script src="js/menu.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+</body>
+</html>

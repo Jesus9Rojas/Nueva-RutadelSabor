@@ -1,0 +1,347 @@
+/* Global */
+:root {
+    --color-principal: #ffc640;
+    --color-secundario: #ff7f00;
+    --color-terciario: #c1440e;
+}
+
+html {
+    box-sizing: border-box !important;
+    font-size: 62.5%; /* 1rem = 10px */
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: cursive;
+    font-size: 1.6rem;
+    line-height: 2;
+    margin: 0 ;
+    background-color: var(--color-secundario) !important;
+}
+
+h1, h3 {
+    font-family: cursive !important;
+}
+
+h1 { font-size: 4.8rem !important; }
+h3 { font-size: 3.4rem !important; }
+
+
+/* Contenedor */
+.contenedor {
+    max-width: 120rem;
+    width: 80%;
+    margin: 2rem auto;
+    margin-top: 9rem;
+    padding: 5rem;
+    background-color: #fff;
+    border-radius: 2rem;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.progress{ 
+  grid-column: 1/3;
+  width: 100%;
+  height: 2rem !important;
+  margin: 1rem auto;
+  max-width: 100%;
+}
+
+.progress-bar{
+  font-size: 1.6rem;
+  font-family: cursive;
+  padding: 1rem;
+  background-color: var(--color-principal) !important;
+}
+
+/* Utilidades */
+.oculto { display: none; }
+
+/* Grid System */
+.fila {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -1.5rem;
+    font-family: cursive;
+}
+
+.columna-6, .columna-12 {
+    padding: 0.5rem 1.5rem;
+    width: 36rem;
+}
+
+/* Formularios */
+.etiqueta-formulario {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #000;
+}
+
+.entrada-formulario {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    font-size: 1.6rem;
+    font-family: cursive;
+    transition: border-color 0.7s ease ;
+    transition: background-color 0.7s ease ;
+    background-color: #e4e4e4;
+    &:focus{
+        outline: none;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+}
+
+input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+input[type="radio"] + label {
+    font-size: 1.6rem;
+    margin-right: 8rem;
+    color: #000;
+}
+
+#step-1 {
+    display: grid;
+    grid-template-columns: inherit; 
+    grid-column: 1/3; 
+}
+
+
+#step-1 .fila {
+    grid-column: 1/2; 
+    margin-left: 0; 
+}
+
+
+#step-1 .info-container {
+    grid-column: 2/3; 
+    margin-top: 0; 
+    padding-left: 2rem; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.info-container {
+    font-family: cursive;
+    font-size: 1.6rem;
+    color: #000;
+    margin-top: 5rem;
+}
+
+.info-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    text-align: left;
+}
+
+.info-container li {
+    margin-bottom: 1rem;
+}
+
+.info-container li:before {
+    content: "✔";
+    color: var(--color-secundario);
+    margin-right: 10px;
+}
+
+/* Botones */
+.boton-confirmar{
+  font-size: 1.6rem;
+  font-family: cursive;
+  background-color: var(--color-secundario);
+  color: #fff;
+  padding: 1rem;
+  width: 40%;
+  font-weight: bold;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  &:hover{
+    background-color:#000;
+    color: var(--color-secundario);
+    border: solid 1px var(--color-secundario);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.botones{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.info-container1{
+  margin-top: 2rem;
+}
+
+
+.botones1{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 12rem;
+  text-align: center;
+}
+
+.info-entrega {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+
+#step-3 {
+    display: grid;
+    grid-template-columns: inherit; /* Hereda la cuadrícula 2fr 1fr de .contenedor */
+    grid-column: 1/3; /* Ocupa ambas columnas de la cuadrícula principal */
+}
+
+#step-3 .fila {
+    grid-column: 1/2; /* Coloca los campos del formulario en la columna izquierda */
+    margin-left: 0; /* Elimina el margen negativo para alinear correctamente */
+}
+
+#step-3 .info-container {
+    grid-column: 2/3; /* Coloca el info-container en la columna derecha */
+    margin-top: 0; /* Alinea con los campos del formulario */
+    padding-left: 2rem; /* Agrega padding para espaciado */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye el contenido verticalmente */
+}
+
+/* Totales */
+.totales p {
+    margin: 0.5rem 0;
+}
+
+/* Estilo para el paso activo */
+.paso.activo {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    /* CONTENEDOR */
+    .contenedor {
+        width: 90%;
+        margin-top: 2rem;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        grid-template-columns: 1fr;
+    }
+
+    .progress {
+        height: 1.8rem !important;
+        margin: 0.5rem auto;
+    }
+
+    .progress-bar {
+        font-size: 1.4rem;
+        padding: 0.8rem;
+    }
+
+    /* PASOS */
+    #step-1, #step-2, #step-3 {
+        grid-template-columns: 1fr;
+    }
+
+    #step-1 .fila, #step-2 .fila, #step-3 .fila {
+        grid-column: 1/2;
+        margin-left: 0;
+        flex-direction: column;
+    }
+
+    .columna-6, .columna-12 {
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+
+    .etiqueta-formulario {
+        font-size: 1.5rem;
+    }
+
+    .entrada-formulario {
+        padding: 0.8rem;
+        font-size: 1.4rem;
+        border-radius: 1.5rem;
+    }
+
+    input[type="radio"] + label {
+        font-size: 1.4rem;
+        margin-right: 2rem;
+    }
+
+    h1 {
+        font-size: 3rem !important;
+        text-align: center;
+    }
+
+    h3 {
+        font-size: 2.2rem !important;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    /* INFO CONTAINER */
+    #step-1 .info-container, #step-3 .info-container {
+        grid-column: 1/2;
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+
+    .info-container {
+        font-size: 1.4rem;
+        margin-top: 2rem;
+    }
+
+    .info-container ul {
+        margin-bottom: 1.5rem;
+    }
+
+    .info-container li {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+
+    /* BOTONES */
+    .botones, .botones1 {
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .boton-confirmar {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1.4rem;
+        border-radius: 1.5rem;
+    }
+
+    .botones1 {
+        gap: 1rem;
+    }
+
+    .info-entrega {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}

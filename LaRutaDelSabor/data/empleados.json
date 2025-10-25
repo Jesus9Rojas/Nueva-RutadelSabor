@@ -1,0 +1,16 @@
+[
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4d71" },
+    "nombre_empleado": "Carlos Ruiz",
+    "id_documento": { "$oid": "60c72b2f9b1e8b001c8e4d41" },
+    "numero_documento": "45678901",
+    "id_rol": { "$oid": "60c72b2f9b1e8b001c8e4d62" }
+  },
+  {
+    "_id": { "$oid": "60c72b2f9b1e8b001c8e4d72" },
+    "nombre_empleado": "Ana Torres",
+    "id_documento": { "$oid": "60c72b2f9b1e8b001c8e4d41" },
+    "numero_documento": "87654321",
+    "id_rol": { "$oid": "60c72b2f9b1e8b001c8e4d63" }
+  }
+]
