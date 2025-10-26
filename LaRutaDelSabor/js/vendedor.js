@@ -286,19 +286,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            // IMPORTANTE: El backend espera "items" NO "productos"
             const ordenData = {
-                items: ordenActual.map(item => ({  // ← Cambio aquí: "items" en vez de "productos"
+                items: ordenActual.map(item => ({
                     producto: item._id,
                     cantidad: item.cantidad,
                     precio: item.precio
                 })),
                 total: parseFloat(total.toFixed(2)),
-                estado: 'Pendiente',  // Estado inicial
+                estado: 'Pendiente',
                 metodoPago: metodoPago
             };
 
-            console.log('Datos enviados:', ordenData); // Para depuración
+            console.log('Datos enviados:', ordenData);
 
             const response = await fetch(`${API_URL}/orders`, {
                 method: 'POST',
@@ -336,15 +335,26 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const data = await response.json();
 
+            console.log('Órdenes recibidas:', data);
+
             if (data.success) {
-                const hoy = new Date().toDateString();
+                const hoy = new Date();
+                const hoyStr = hoy.toISOString().split('T')[0];
+                
                 const ordenesHoy = data.data.filter(orden => {
-                    const fechaOrden = new Date(orden.createdAt).toDateString();
-                    return fechaOrden === hoy;
+                    const fechaOrden = orden.fechaPedido || orden.createdAt || orden.fecha;
+                    if (!fechaOrden) return false;
+                    
+                    const fechaOrdenStr = new Date(fechaOrden).toISOString().split('T')[0];
+                    return fechaOrdenStr === hoyStr;
                 });
+
+                console.log('Órdenes de hoy:', ordenesHoy);
 
                 renderizarOrdenesTabla(ordenesHoy);
                 actualizarEstadisticas(ordenesHoy);
+            } else {
+                console.error('Error al cargar órdenes:', data);
             }
         } catch (error) {
             console.error('Error al cargar órdenes:', error);
@@ -361,14 +371,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         ordenes.forEach(orden => {
-            const fecha = new Date(orden.createdAt);
+            const fechaOrden = new Date(orden.fechaPedido || orden.createdAt || orden.fecha);
+            const hora = fechaOrden.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'});
+            const nombreCliente = orden.usuario?.nombre || orden.cliente || 'Cliente General';
+            const estado = orden.estado || 'Pendiente';
+            
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>#${orden._id.slice(-6)}</td>
-                <td>${fecha.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'})}</td>
-                <td>${orden.usuario?.nombre || 'Cliente General'}</td>
+                <td>${hora}</td>
+                <td>${nombreCliente}</td>
                 <td>S/ ${orden.total.toFixed(2)}</td>
-                <td><span class="badge badge-success">${orden.estado}</span></td>
+                <td><span class="badge badge-success">${estado}</span></td>
                 <td>
                     <button class="btn btn-sm btn-primary" onclick="verDetalleOrden('${orden._id}')">
                         <i class="bi bi-eye"></i>
@@ -381,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function actualizarEstadisticas(ordenes) {
         const totalOrdenes = ordenes.length;
-        const ventasHoy = ordenes.reduce((sum, orden) => sum + orden.total, 0);
+        const ventasHoy = ordenes.reduce((sum, orden) => sum + (orden.total || 0), 0);
 
         document.getElementById('totalOrdenes').textContent = totalOrdenes;
         document.getElementById('ventasHoy').textContent = `S/ ${ventasHoy.toFixed(2)}`;
@@ -405,12 +419,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function mostrarDetalleOrden(orden) {
         const body = document.getElementById('detalleOrdenBody');
+        const items = orden.items || orden.productos || orden.products || [];
+        
+        console.log('Orden completa:', orden);
+        console.log('Items de la orden:', items);
+        
         body.innerHTML = `
             <div class="orden-detalle">
                 <h5>Orden #${orden._id.slice(-6)}</h5>
-                <p><strong>Cliente:</strong> ${orden.usuario?.nombre || 'Cliente General'}</p>
-                <p><strong>Fecha:</strong> ${new Date(orden.createdAt).toLocaleString('es-ES')}</p>
+                <p><strong>Cliente:</strong> ${orden.usuario?.nombre || orden.cliente || 'Cliente General'}</p>
+                <p><strong>Fecha:</strong> ${new Date(orden.fechaPedido || orden.createdAt || orden.fecha).toLocaleString('es-ES')}</p>
                 <p><strong>Método de Pago:</strong> ${orden.metodoPago || 'Efectivo'}</p>
+                <p><strong>Estado:</strong> ${orden.estado || 'Pendiente'}</p>
                 <hr>
                 <h6>Productos:</h6>
                 <table class="table">
@@ -423,19 +443,26 @@ document.addEventListener('DOMContentLoaded', () => {
                         </tr>
                     </thead>
                     <tbody>
-                        ${orden.productos.map(item => `
-                            <tr>
-                                <td>${item.producto?.nombre || 'Producto'}</td>
-                                <td>${item.cantidad}</td>
-                                <td>S/ ${item.precio.toFixed(2)}</td>
-                                <td>S/ ${(item.cantidad * item.precio).toFixed(2)}</td>
-                            </tr>
-                        `).join('')}
+                        ${items.length > 0 ? items.map(item => {
+                            const nombreProducto = item.producto?.nombre || item.nombre || 'Producto';
+                            const cantidad = item.cantidad || 1;
+                            const precio = item.precio || item.producto?.precio || 0;
+                            const subtotal = cantidad * precio;
+                            
+                            return `
+                                <tr>
+                                    <td>${nombreProducto}</td>
+                                    <td>${cantidad}</td>
+                                    <td>S/ ${precio.toFixed(2)}</td>
+                                    <td>S/ ${subtotal.toFixed(2)}</td>
+                                </tr>
+                            `;
+                        }).join('') : '<tr><td colspan="4" class="text-center">No hay productos</td></tr>'}
                     </tbody>
                     <tfoot>
                         <tr class="table-total">
                             <td colspan="3"><strong>TOTAL:</strong></td>
-                            <td><strong>S/ ${orden.total.toFixed(2)}</strong></td>
+                            <td><strong>S/ ${(orden.total || 0).toFixed(2)}</strong></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -456,13 +483,24 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const data = await response.json();
 
+            console.log('Órdenes para arqueo:', data);
+
             if (data.success) {
-                const hoy = new Date().toDateString();
+                const hoy = new Date();
+                const hoyStr = hoy.toISOString().split('T')[0];
+                
                 const ordenesHoy = data.data.filter(orden => {
-                    const fechaOrden = new Date(orden.createdAt).toDateString();
-                    return fechaOrden === hoy && orden.estado === 'completado';
+                    const fechaOrden = orden.fechaPedido || orden.createdAt || orden.fecha;
+                    if (!fechaOrden) return false;
+                    
+                    const fechaOrdenStr = new Date(fechaOrden).toISOString().split('T')[0];
+                    const estado = (orden.estado || '').toLowerCase();
+                    
+                    return fechaOrdenStr === hoyStr && 
+                           (estado === 'completado' || estado === 'entregado' || estado === 'pendiente' || estado === 'en camino');
                 });
 
+                console.log('Órdenes del día para arqueo:', ordenesHoy);
                 calcularArqueo(ordenesHoy);
             }
         } catch (error) {
@@ -475,31 +513,487 @@ document.addEventListener('DOMContentLoaded', () => {
         let efectivo = 0, tarjeta = 0, yape = 0;
 
         ordenes.forEach(orden => {
-            const metodo = orden.metodoPago || 'efectivo';
+            const total = parseFloat(orden.total) || 0;
+            const metodo = (orden.metodoPago || 'efectivo').toLowerCase();
+            
+            console.log(`Orden: ${orden._id.slice(-6)}, Total: ${total}, Método: ${metodo}`);
+            
             switch(metodo) {
                 case 'efectivo':
-                    efectivo += orden.total;
+                    efectivo += total;
                     break;
                 case 'tarjeta':
-                    tarjeta += orden.total;
+                    tarjeta += total;
                     break;
                 case 'yape':
-                    yape += orden.total;
+                case 'plin':
+                    yape += total;
                     break;
+                default:
+                    efectivo += total;
             }
         });
 
-        const total = efectivo + tarjeta + yape;
+        const totalCaja = efectivo + tarjeta + yape;
+
+        console.log('Arqueo calculado:', { numOrdenes, efectivo, tarjeta, yape, totalCaja });
 
         document.getElementById('arqueNumOrdenes').textContent = numOrdenes;
         document.getElementById('arqueEfectivo').textContent = `S/ ${efectivo.toFixed(2)}`;
         document.getElementById('arqueTarjeta').textContent = `S/ ${tarjeta.toFixed(2)}`;
         document.getElementById('arqueYape').textContent = `S/ ${yape.toFixed(2)}`;
-        document.getElementById('arqueTotalCaja').textContent = `S/ ${total.toFixed(2)}`;
+        document.getElementById('arqueTotalCaja').textContent = `S/ ${totalCaja.toFixed(2)}`;
     }
 
+    // ==========================================
+    // IMPRIMIR ARQUEO - VERSIÓN PROFESIONAL
+    // ==========================================
     window.imprimirArqueo = function() {
-        window.print();
+        const vendedor = document.getElementById('arqueVendedor').textContent;
+        const fecha = document.getElementById('arqueFecha').textContent;
+        const numOrdenes = document.getElementById('arqueNumOrdenes').textContent;
+        const efectivo = document.getElementById('arqueEfectivo').textContent;
+        const tarjeta = document.getElementById('arqueTarjeta').textContent;
+        const yape = document.getElementById('arqueYape').textContent;
+        const totalCaja = document.getElementById('arqueTotalCaja').textContent;
+        
+        const ahora = new Date();
+        const horaImpresion = ahora.toLocaleTimeString('es-ES');
+        
+        const ventanaImpresion = window.open('', '_blank', 'width=800,height=600');
+        
+        ventanaImpresion.document.write(`
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <title>Arqueo de Caja - ${fecha}</title>
+                <style>
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+                    
+                    body {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        padding: 20px;
+                        background: white;
+                        color: #000;
+                        font-size: 14px;
+                    }
+                    
+                    .reporte-container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        border: 3px solid #ff7f00;
+                        padding: 30px;
+                        border-radius: 10px;
+                        position: relative;
+                    }
+                    
+                    .header {
+                        text-align: center;
+                        border-bottom: 3px solid #ff7f00;
+                        padding-bottom: 20px;
+                        margin-bottom: 25px;
+                        background: linear-gradient(135deg, #ffc640 0%, #ff7f00 100%);
+                        padding: 25px;
+                        border-radius: 8px;
+                        color: white;
+                    }
+                    
+                    .header img {
+                        width: 100px;
+                        height: 100px;
+                        margin-bottom: 15px;
+                        border-radius: 50%;
+                        border: 4px solid white;
+                        background: white;
+                        padding: 5px;
+                    }
+                    
+                    .header h1 {
+                        font-size: 32px;
+                        font-weight: bold;
+                        margin-bottom: 8px;
+                        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+                    }
+                    
+                    .header h2 {
+                        font-size: 22px;
+                        margin-bottom: 10px;
+                        font-weight: 600;
+                        letter-spacing: 2px;
+                    }
+                    
+                    .header p {
+                        font-size: 14px;
+                        opacity: 0.95;
+                    }
+                    
+                    .info-section {
+                        margin: 25px 0;
+                        padding: 20px;
+                        background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+                        border: 2px solid #ffc640;
+                        border-radius: 8px;
+                    }
+                    
+                    .info-row {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 12px 0;
+                        border-bottom: 1px dotted #ff7f00;
+                    }
+                    
+                    .info-row:last-child {
+                        border-bottom: none;
+                    }
+                    
+                    .info-label {
+                        font-weight: bold;
+                        color: #c1440e;
+                        font-size: 15px;
+                    }
+                    
+                    .info-value {
+                        color: #000;
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
+                    
+                    .detalles-section {
+                        margin: 30px 0;
+                    }
+                    
+                    .detalles-section h3 {
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin-bottom: 15px;
+                        padding: 12px;
+                        background: #ff7f00;
+                        color: white;
+                        border-radius: 5px;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    }
+                    
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin: 20px 0;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                    }
+                    
+                    table th {
+                        background: #1a1a1a;
+                        color: white;
+                        padding: 15px;
+                        text-align: left;
+                        font-weight: bold;
+                        font-size: 14px;
+                        border-bottom: 3px solid #ff7f00;
+                    }
+                    
+                    table td {
+                        padding: 12px 15px;
+                        border-bottom: 1px solid #e0e0e0;
+                        font-size: 14px;
+                    }
+                    
+                    table tr:nth-child(even) {
+                        background: #fff5e6;
+                    }
+                    
+                    table tr:hover {
+                        background: #ffe6cc;
+                    }
+                    
+                    .total-row {
+                        background: linear-gradient(135deg, #ff7f00 0%, #c1440e 100%) !important;
+                        color: white !important;
+                        font-weight: bold;
+                        font-size: 16px;
+                    }
+                    
+                    .total-row td {
+                        padding: 18px 15px;
+                        border: none;
+                        font-size: 16px;
+                    }
+                    
+                    .resumen-metodos {
+                        margin: 30px 0;
+                        padding: 25px;
+                        background: white;
+                        border: 3px solid #ff7f00;
+                        border-radius: 10px;
+                        box-shadow: 0 4px 12px rgba(255, 127, 0, 0.15);
+                    }
+                    
+                    .resumen-metodos h3 {
+                        color: #ff7f00;
+                        font-size: 18px;
+                        margin-bottom: 20px;
+                        padding-bottom: 10px;
+                        border-bottom: 2px solid #ffc640;
+                    }
+                    
+                    .metodo-pago {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 14px 10px;
+                        font-size: 15px;
+                        border-bottom: 1px solid #f0f0f0;
+                    }
+                    
+                    .metodo-pago:last-child {
+                        border-bottom: none;
+                    }
+                    
+                    .metodo-pago.destacado {
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: white;
+                        background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+                        padding: 20px;
+                        margin-top: 15px;
+                        border-radius: 8px;
+                        border: none;
+                        box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+                    }
+                    
+                    .footer {
+                        margin-top: 50px;
+                        padding-top: 25px;
+                        border-top: 3px solid #ff7f00;
+                        text-align: center;
+                    }
+                    
+                    .firma-section {
+                        margin-top: 60px;
+                        display: flex;
+                        justify-content: space-around;
+                        gap: 30px;
+                    }
+                    
+                    .firma-box {
+                        text-align: center;
+                        width: 45%;
+                        padding: 20px;
+                        border: 2px dashed #ff7f00;
+                        border-radius: 8px;
+                        background: #fff5e6;
+                    }
+                    
+                    .firma-linea {
+                        border-top: 2px solid #1a1a1a;
+                        margin-top: 70px;
+                        margin-bottom: 12px;
+                    }
+                    
+                    .firma-box p {
+                        margin: 5px 0;
+                    }
+                    
+                    .firma-box strong {
+                        color: #c1440e;
+                        font-size: 15px;
+                    }
+                    
+                    .nota {
+                        font-size: 12px;
+                        color: #666;
+                        font-style: italic;
+                        margin-top: 25px;
+                        line-height: 1.6;
+                    }
+                    
+                    .sello-confidencial {
+                        position: absolute;
+                        top: 20px;
+                        right: 20px;
+                        padding: 10px 20px;
+                        border: 3px solid #c1440e;
+                        border-radius: 5px;
+                        transform: rotate(15deg);
+                        color: #c1440e;
+                        font-weight: bold;
+                        font-size: 12px;
+                        opacity: 0.6;
+                    }
+                    
+                    @media print {
+                        body {
+                            padding: 0;
+                        }
+                        
+                        .reporte-container {
+                            border: 2px solid #ff7f00;
+                            max-width: 100%;
+                            page-break-inside: avoid;
+                        }
+                        
+                        .info-section, .resumen-metodos {
+                            break-inside: avoid;
+                        }
+                        
+                        table {
+                            break-inside: avoid;
+                        }
+                        
+                        .firma-section {
+                            break-before: avoid;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="reporte-container">
+                    <div class="sello-confidencial">USO INTERNO</div>
+                    
+                    <!-- Header -->
+                    <div class="header">
+                        <img src="Icon/logo.png" alt="Logo" onerror="this.style.display='none'">
+                        <h1>🍔 LA RUTA DEL SABOR</h1>
+                        <h2>REPORTE DE ARQUEO DE CAJA</h2>
+                        <p>Sistema de Punto de Venta - Control Diario de Operaciones</p>
+                    </div>
+                    
+                    <!-- Información General -->
+                    <div class="info-section">
+                        <div class="info-row">
+                            <span class="info-label">👤 Responsable del Turno:</span>
+                            <span class="info-value">${vendedor}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">📅 Fecha de Operación:</span>
+                            <span class="info-value">${fecha}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">🕐 Hora de Cierre y Generación:</span>
+                            <span class="info-value">${horaImpresion}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">⏰ Turno de Trabajo:</span>
+                            <span class="info-value">Turno Día - Completo</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">📄 N° de Reporte:</span>
+                            <span class="info-value">ARQ-${new Date().getFullYear()}${String(new Date().getMonth()+1).padStart(2,'0')}${String(new Date().getDate()).padStart(2,'0')}-001</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Detalles de Ventas -->
+                    <div class="detalles-section">
+                        <h3>📊 RESUMEN DE OPERACIONES DEL DÍA</h3>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concepto</th>
+                                    <th style="text-align: right;">Cantidad/Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>📋 Total de Órdenes Procesadas</strong></td>
+                                    <td style="text-align: right; font-weight: bold;">${numOrdenes} órdenes</td>
+                                </tr>
+                                <tr>
+                                    <td>Promedio por Orden</td>
+                                    <td style="text-align: right;">${numOrdenes > 0 ? 'S/ ' + (parseFloat(totalCaja.replace('S/ ','')) / parseInt(numOrdenes)).toFixed(2) : 'S/ 0.00'}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Resumen por Método de Pago -->
+                    <div class="resumen-metodos">
+                        <h3>💰 DESGLOSE DETALLADO POR MÉTODO DE PAGO</h3>
+                        
+                        <div class="metodo-pago">
+                            <span><strong>💵 Efectivo (Cash):</strong></span>
+                            <span style="font-weight: bold; color: #28a745;">${efectivo}</span>
+                        </div>
+                        
+                        <div class="metodo-pago">
+                            <span><strong>💳 Tarjeta Crédito/Débito:</strong></span>
+                            <span style="font-weight: bold; color: #007bff;">${tarjeta}</span>
+                        </div>
+                        
+                        <div class="metodo-pago">
+                            <span><strong>📱 Yape / Plin (Transferencias):</strong></span>
+                            <span style="font-weight: bold; color: #9c27b0;">${yape}</span>
+                        </div>
+                        
+                        <div class="metodo-pago destacado">
+                            <span>💎 TOTAL GENERAL EN CAJA:</span>
+                            <span>${totalCaja}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Observaciones -->
+                    <div class="info-section">
+                        <div class="info-row">
+                            <span class="info-label">📝 Observaciones:</span>
+                            <span class="info-value">_________________________________________________</span>
+                        </div>
+                        <div style="margin-top: 15px; padding: 15px; background: white; border-radius: 5px;">
+                            <p style="font-size: 13px; color: #666; margin: 0;">
+                                <strong>Notas Adicionales:</strong><br>
+                                ________________________________________________________________<br>
+                                ________________________________________________________________<br>
+                                ________________________________________________________________
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Sección de Firmas -->
+                    <div class="firma-section">
+                        <div class="firma-box">
+                            <div class="firma-linea"></div>
+                            <p><strong>Firma del Vendedor/Cajero</strong></p>
+                            <p style="font-size: 13px; color: #666;">${vendedor}</p>
+                            <p style="font-size: 11px; color: #999;">Elaboró y Verificó</p>
+                        </div>
+                        
+                        <div class="firma-box">
+                            <div class="firma-linea"></div>
+                            <p><strong>Firma del Supervisor/Gerente</strong></p>
+                            <p style="font-size: 13px; color: #666;">Autorización y Visto Bueno</p>
+                            <p style="font-size: 11px; color: #999;">Revisó y Aprobó</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Footer -->
+                    <div class="footer">
+                        <p style="font-weight: bold; color: #ff7f00; margin-bottom: 10px;">
+                            ⚠️ DOCUMENTO CONFIDENCIAL - USO INTERNO EXCLUSIVO
+                        </p>
+                        <p class="nota">
+                            Este documento constituye un comprobante interno de arqueo de caja y control de efectivo.<br>
+                            Los datos presentados son de carácter confidencial y para uso administrativo exclusivo.<br>
+                            Generado automáticamente por el Sistema POS - La Ruta del Sabor<br>
+                            <strong>© ${new Date().getFullYear()} La Ruta del Sabor - Todos los derechos reservados</strong><br>
+                            Documento generado el ${new Date().toLocaleString('es-ES')}
+                        </p>
+                    </div>
+                </div>
+                
+                <script>
+                    window.onload = function() {
+                        window.print();
+                    }
+                </script>
+            </body>
+            </html>
+        `);
+        
+        ventanaImpresion.document.close();
     };
 
     window.imprimirOrden = function() {
