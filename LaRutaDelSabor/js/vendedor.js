@@ -755,11 +755,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     
                     .metodo-pago.destacado {
-                        font-size: 20px;
+                        font-size: 1rem;
                         font-weight: bold;
                         color: white;
                         background: linear-gradient(135deg, #28a745 0%, #218838 100%);
-                        padding: 20px;
+                        padding: 1rem;
                         margin-top: 15px;
                         border-radius: 8px;
                         border: none;
@@ -933,22 +933,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="metodo-pago destacado">
                             <span>💎 TOTAL GENERAL EN CAJA:</span>
                             <span>${totalCaja}</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Observaciones -->
-                    <div class="info-section">
-                        <div class="info-row">
-                            <span class="info-label">📝 Observaciones:</span>
-                            <span class="info-value">_________________________________________________</span>
-                        </div>
-                        <div style="margin-top: 15px; padding: 15px; background: white; border-radius: 5px;">
-                            <p style="font-size: 13px; color: #666; margin: 0;">
-                                <strong>Notas Adicionales:</strong><br>
-                                ________________________________________________________________<br>
-                                ________________________________________________________________<br>
-                                ________________________________________________________________
-                            </p>
                         </div>
                     </div>
                     
