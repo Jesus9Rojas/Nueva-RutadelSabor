@@ -5,16 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user'));
 
-    // Validación de acceso - Solo usuarios autenticados que NO sean admin
+    // Validación de acceso - Solo la cuenta específica de vendedor
     if (!token || !user) {
         alert('Debes iniciar sesión para acceder al sistema POS.');
         window.location.href = 'login.html';
         return;
     }
 
-    if (user.email === 'test@test.com' && user.rol === 'admin') {
-        alert('Los administradores deben usar el panel de administración.');
-        window.location.href = 'admin.html';
+    // Solo permite acceso a vendedor1@vendedorRS.com
+    if (user.email !== 'vendedor1@vendedorRS.com') {
+        alert('No tienes permisos para acceder al sistema POS.');
+        window.location.href = 'index.html';
         return;
     }
 
@@ -285,17 +286,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
+            // IMPORTANTE: El backend espera "items" NO "productos"
             const ordenData = {
-                productos: ordenActual.map(item => ({
+                items: ordenActual.map(item => ({  // ← Cambio aquí: "items" en vez de "productos"
                     producto: item._id,
                     cantidad: item.cantidad,
                     precio: item.precio
                 })),
-                total: total,
-                estado: 'completado',
-                metodoPago: metodoPago,
-                cliente: nombreCliente
+                total: parseFloat(total.toFixed(2)),
+                estado: 'Pendiente',  // Estado inicial
+                metodoPago: metodoPago
             };
+
+            console.log('Datos enviados:', ordenData); // Para depuración
 
             const response = await fetch(`${API_URL}/orders`, {
                 method: 'POST',
@@ -315,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const modal = bootstrap.Modal.getInstance(document.getElementById('modalPago'));
                 modal.hide();
             } else {
-                throw new Error(result.msg || 'Error al procesar la venta');
+                throw new Error(result.msg || result.error || 'Error al procesar la venta');
             }
         } catch (error) {
             console.error('Error:', error);

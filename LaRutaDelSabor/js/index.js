@@ -230,6 +230,9 @@ function initializeCarousel() {
 }
 
 // Renderizar segun el acceso
+
+// REEMPLAZAR LA FUNCIÓN renderAuthButtons en index.js CON ESTA:
+
 function renderAuthButtons() {
     const authButtons = document.getElementById('botones-autenticacion');
     const user = JSON.parse(localStorage.getItem('user'));
@@ -237,6 +240,7 @@ function renderAuthButtons() {
     
     authButtons.innerHTML = '';
 
+    // ADMINISTRADOR - Cuenta específica test@test.com
     if (token && user && user.email === 'test@test.com') {
         authButtons.innerHTML = `
             <div class="registro">
@@ -250,16 +254,35 @@ function renderAuthButtons() {
                 </a>
             </div>
         `;
-    } else if (token && user) {
+    } 
+    // VENDEDOR - Cuenta específica vendedor1@vendedorRS.com
+    else if (token && user && user.email === 'vendedor1@vendedorRS.com') {
         authButtons.innerHTML = `
             <div class="registro">
-                <a href="#" onclick="logout()"><img src="Icon/cerrar-con-llave.png" alt="Carrito"></a>
+                <a href="vendedor.html" class="admin-btn">
+                    <i class="bi bi-cart-plus-fill"></i> Sistema POS
+                </a>
+            </div>
+            <div class="registro">
+                <a href="#" onclick="logout()" class="admin-btn">
+                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                </a>
+            </div>
+        `;
+    }
+    // CLIENTE AUTENTICADO (cualquier otro usuario)
+    else if (token && user) {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="#" onclick="logout()"><img src="Icon/cerrar-con-llave.png" alt="Cerrar Sesión"></a>
             </div>
             <div class="carrito">
                 <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
             </div>
         `;
-    } else {
+    } 
+    // USUARIO NO AUTENTICADO
+    else {
         authButtons.innerHTML = `
             <div class="registro">
                 <a href="login.html"><img src="Icon/iniciar_sesion.png" alt="Iniciar Sesión"></a>

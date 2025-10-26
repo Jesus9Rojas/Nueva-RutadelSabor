@@ -145,45 +145,65 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Renderiza los botones de autenticación según el estado del usuario
     function renderAuthButtons() {
-        const authButtons = document.getElementById('botones-autenticacion');
-        const user = JSON.parse(localStorage.getItem('user'));
-        const token = localStorage.getItem('token');
-        
-        authButtons.innerHTML = '';
+    const authButtons = document.getElementById('botones-autenticacion');
+    const user = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
+    
+    authButtons.innerHTML = '';
 
-        if (token && user && user.email === 'test@test.com') {
-            authButtons.innerHTML = `
-                <div class="registro">
-                    <a href="admin.html" class="admin-btn">
-                        <i class="bi bi-basket-fill"></i> Registrar Productos
-                    </a>
-                </div>
-                <div class="registro">
-                    <a href="#" onclick="logout()" class="admin-btn">
-                        <i class="bi bi-box-arrow-right"></i> Salir Modo Admin
-                    </a>
-                </div>
-            `;
-        } else if (token && user) {
-            authButtons.innerHTML = `
-                <div class="registro">                
-                <a href="#" onclick="logout()"><img src="Icon/cerrar-con-llave.png" alt="Carrito"></a>
-                </div>
-                <div class="carrito">
-                    <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
-                </div>
-            `;
-        } else {
-            authButtons.innerHTML = `
-                <div class="registro">
-                    <a href="login.html"><img src="Icon/iniciar_sesion.png" alt="Iniciar Sesión"></a>
-                </div>
-                <div class="carrito">
-                    <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
-                </div>
-            `;
-        }
+    // ADMINISTRADOR - Cuenta específica test@test.com
+    if (token && user && user.email === 'test@test.com') {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="admin.html" class="admin-btn">
+                    <i class="bi bi-basket-fill"></i> Registrar Productos
+                </a>
+            </div>
+            <div class="registro">
+                <a href="#" onclick="logout()" class="admin-btn">
+                    <i class="bi bi-box-arrow-right"></i> Salir Modo Admin
+                </a>
+            </div>
+        `;
+    } 
+    // VENDEDOR - Cuenta específica vendedor1@vendedorRS.com
+    else if (token && user && user.email === 'vendedor1@vendedorRS.com') {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="vendedor.html" class="admin-btn">
+                    <i class="bi bi-cart-plus-fill"></i> Sistema POS
+                </a>
+            </div>
+            <div class="registro">
+                <a href="#" onclick="logout()" class="admin-btn">
+                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                </a>
+            </div>
+        `;
     }
+    // CLIENTE AUTENTICADO (cualquier otro usuario)
+    else if (token && user) {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="#" onclick="logout()"><img src="Icon/cerrar-con-llave.png" alt="Cerrar Sesión"></a>
+            </div>
+            <div class="carrito">
+                <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
+            </div>
+        `;
+    } 
+    // USUARIO NO AUTENTICADO
+    else {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="login.html"><img src="Icon/iniciar_sesion.png" alt="Iniciar Sesión"></a>
+            </div>
+            <div class="carrito">
+                <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
+            </div>
+        `;
+    }
+}
 
     // ============================================
     // FUNCIONALIDAD RESPONSIVE PARA MENÚ MÓVIL

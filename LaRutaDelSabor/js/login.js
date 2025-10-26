@@ -1,3 +1,5 @@
+// login.js - Con cuenta específica de vendedor
+
 document.addEventListener("DOMContentLoaded", () => {
   const loginPage = document.querySelector(".login-page");
   const API_URL = "https://hamburguer-xmx8.onrender.com/api";
@@ -55,10 +57,26 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: { Authorization: `Bearer ${data.token}` },
       });
       const userData = await userResponse.json();
+      
       if (userData.success) {
         localStorage.setItem("user", JSON.stringify(userData.data));
+        
+        // REDIRECCIÓN SEGÚN EL EMAIL ESPECÍFICO
+        const user = userData.data;
+        
+        // Si es el ADMINISTRADOR (cuenta específica)
+        if (user.email === 'test@test.com') {
+          window.location.href = "admin.html";
+        } 
+        // Si es el VENDEDOR (cuenta específica)
+        else if (user.email === 'vendedor1@vendedorRS.com') {
+          window.location.href = "vendedor.html";
+        }
+        // Cualquier otro usuario es CLIENTE
+        else {
+          window.location.href = "index.html";
+        }
       }
-      window.location.href = "/index.html";
     } catch (error) {
       console.error("Error en el inicio de sesión:", error.message);
       mostrarError("formulario-login", error.message);
@@ -104,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       console.log("Registro exitoso. Redirigiendo a la vista de inicio de sesión.");
+      alert("Registro exitoso. Ya puedes iniciar sesión.");
       mostrarVista("login-template");
     } catch (error) {
       console.error("Error en el registro:", error.message);
@@ -137,7 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
         mostrarVista("login-template");
       });
     }
-    const btnMostrarRegistro = document.getElementById("btn-mostrar-registro"); // Añadido
+
+    const btnMostrarRegistro = document.getElementById("btn-mostrar-registro");
     if (btnMostrarRegistro) {
       btnMostrarRegistro.addEventListener("click", (e) => {
         e.preventDefault();
@@ -145,15 +165,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
+
   mostrarVista("login-template");
 });
 
-//Agrandamiento de las redes al abrir
+// Agrandamiento de las redes al abrir
 document.addEventListener("DOMContentLoaded", () => {
     const socialLinks = document.querySelectorAll(".social-link");
-    const logo = document.querySelector(".logo-img");
 
-    // Efecto de explosión en las redes sociales
     socialLinks.forEach(link => {
         link.addEventListener("click", function (e) {
             e.preventDefault();
@@ -166,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 500);
         });
     });
-  });
+});
 
 window.addEventListener("DOMContentLoaded", () => {
 });
