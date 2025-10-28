@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     renderAuthButtons();
     initializeCarousel();
+    mostrarVentanaBienvenida();
 });
 
 // Carrusel de reseñas
@@ -270,6 +271,21 @@ function renderAuthButtons() {
             </div>
         `;
     }
+     // DELIVERY - Cuenta específica delivery1@vendedorRS.com
+    else if (token && user && user.email === 'delivery1@vendedorRS.com') {
+        authButtons.innerHTML = `
+            <div class="registro">
+                <a href="delivery.html" class="admin-btn">
+                    <i class="bi bi-truck"></i> Panel Delivery
+                </a>
+            </div>
+            <div class="registro">
+                <a href="#" onclick="logout()" class="admin-btn">
+                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                </a>
+            </div>
+        `;
+    }
     // CLIENTE AUTENTICADO (cualquier otro usuario)
     else if (token && user) {
         authButtons.innerHTML = `
@@ -375,3 +391,44 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
   });
+
+// Lógica de la ventana de Bienvenida
+function mostrarVentanaBienvenida() {
+    const ventana = document.getElementById('ventanaBienvenida');
+    if (!ventana) {
+        console.error('El elemento ventanaBienvenida no se encontró en el DOM');
+        return; // Salir si no se encuentra el elemento
+    }
+
+    const haVistoVentana = localStorage.getItem('haVistoVentanaBienvenida');
+    console.log('Valor de haVistoVentana:', haVistoVentana); // Depuración
+
+    // Mostrar el modal solo si no se ha visto antes en esta sesión
+    if (!haVistoVentana) {
+        ventana.classList.remove('oculto');
+        console.log('Modal mostrado'); // Depuración
+    }
+
+    // Botón de cerrar: solo oculta el modal temporalmente
+    const botonCerrar = document.querySelector('.boton-cerrar');
+    if (botonCerrar) {
+        botonCerrar.addEventListener('click', () => {
+            ventana.classList.add('oculto');
+            console.log('Modal cerrado'); // Depuración
+        });
+    } else {
+        console.error('El botón de cerrar no se encontró en el DOM');
+    }
+
+    // Botón de crear cuenta: oculta el modal y guarda en localStorage
+    const botonCrearCuenta = document.querySelector('.boton-crear-cuenta');
+    if (botonCrearCuenta) {
+        botonCrearCuenta.addEventListener('click', () => {
+            ventana.classList.add('oculto');
+            localStorage.setItem('haVistoVentanaBienvenida', 'true'); // Marca como visto
+            window.location.href = 'login.html';
+        });
+    } else {
+        console.error('El botón de crear cuenta no se encontró en el DOM');
+    }
+}

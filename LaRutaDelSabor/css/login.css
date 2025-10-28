@@ -176,70 +176,69 @@ img{
   font-weight: 600;
 }
 
-.input-group{
+
+/* Input Group */
+.input-group {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 1rem;
+    width: 100%;
 }
 
-.input-group input{
+.input-group label {
+    display: block;
+    font-size: 1.6rem; 
+    color: #333; 
+    margin-bottom: 0.5rem; 
+    margin-left: 0.5rem;
+    font-weight: 500; 
+}
+
+.input-group input {
     width: 100%;
     padding: 15px 20px;
     border: none;
     outline: none;
-    border-radius: 35px;
-    font-size: 16px;
+    border-radius: 1.5rem;
+    font-size: 1.6rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
     background-color: #e4e4e4;
 }
 
-.input-group input::placeholder{
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.input-group input:focus{
+.input-group input:focus {
     background: rgba(255, 255, 255, 0.97);
-    box-shadow: 0 8px 20px rgba(0, 0, 0,0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.input-group label{
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    color: black;
-    font-size: 16px;
-    pointer-events: none;
-    transition:  all 0.3s ease;
+/* Eliminar las reglas de animación del label */
+.input-group input:focus + label,
+.input-group input:valid + label {
+    /* Estas reglas ya no son necesarias porque el label está arriba */
+    display: none; /* Opcional: oculta el label si no quieres que interfiera */
 }
 
-.input-group input:focus + label, .input-group input:valid + label{
-    top: 0;
-    left:15px;
-    font-size: 12px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 2px 8px;
-    border-radius: 10px;
-    color: black;
+/* Resto del CSS permanece igual */
+.form-container button,
+.form-container2 button {
+    background-color: var(--color-secundario);
+    color: #fff;
+    padding: 15px;
+    width: 100%;
+    font-weight: bold;
+    border: none;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
-
-.form-container button, .form-container2 button {
-  background-color: var(--color-secundario);
-  color: #fff;
-  padding: 15px;
-  width: 100%;
-  font-weight: bold;
-  border: none;
-  border-radius: 2rem;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-  &:hover{
-    background-color:#000;
+.form-container button:hover,
+.form-container2 button:hover {
+    background-color: #000;
     color: var(--color-secundario);
     border: solid 1px var(--color-secundario);
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
 }
 
 .info-container {

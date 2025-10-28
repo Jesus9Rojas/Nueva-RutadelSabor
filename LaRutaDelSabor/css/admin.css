@@ -70,20 +70,35 @@ h3, h4 {
     background-color: var(--color-secundario) !important;
     color: #fff !important;
     border: none !important;
-    padding: 1rem 2rem !important;
+    padding: 1rem!important;
     font-family: cursive !important;
-    font-size: 1.6rem !important;
+    font-size: 1.3rem !important;
     font-weight: bold !important;
     border-radius: 2rem !important;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-.btn-naranja:hover {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    &:hover{
     background-color: #000 !important;
     color: var(--color-secundario) !important;
     border: solid 1px var(--color-secundario) !important;
     transform: scale(1.05) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    }
+}
+
+.btn-outline-secondary{
+    background-color: #6d6d6d;
+    color: white;
+    border: none ;
+    padding: 1rem;
+    font-family: cursive ;
+    font-size: 1.3rem !important;
+    font-weight: bold ;
+    border-radius: 2rem !important;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    &:hover{
+        background-color: #000;
+        color: white;
+        transform: scale(1.05);
+    }
 }
 
 /* Secciones */
@@ -381,6 +396,135 @@ h3, h4 {
     padding: 3rem !important;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
     margin-bottom: 3rem !important;
+}
+
+/* ============================================
+   ESTILOS ADICIONALES PARA SECCIÓN DE ÓRDENES
+   Agregar al final de admin.css
+   ============================================ */
+
+/* Contenedor de filtros */
+.filter-container {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--color-secundario);
+}
+
+/* Botón de generar reporte */
+#generateReportBtn {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  border: none;
+  padding: 12px 24px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
+}
+
+#generateReportBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3);
+  background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+}
+
+#generateReportBtn:active {
+  transform: translateY(0);
+}
+
+/* Inputs de fecha mejorados */
+input[type="date"] {
+  border: 2px solid #e0e0e0;
+  transition: border-color 0.3s ease;
+}
+
+input[type="date"]:focus {
+  border-color: var(--color-secundario);
+  box-shadow: 0 0 0 0.2rem rgba(255, 127, 0, 0.25);
+}
+
+/* Botón aplicar filtro */
+#applyRangeFilter {
+  font-weight: 600;
+}
+
+/* Tabla de órdenes - Estados */
+.status-select {
+  border: 2px solid #e0e0e0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.status-select:focus {
+  border-color: var(--color-secundario);
+  box-shadow: 0 0 0 0.2rem rgba(255, 127, 0, 0.15);
+}
+
+/* Colores según estado */
+.status-select option[value="Pendiente"] {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-select option[value="En Camino"] {
+  background-color: #cfe2ff;
+  color: #084298;
+}
+
+.status-select option[value="Entregado"] {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+/* Gráficos - Contenedores */
+.chart-container {
+  position: relative;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Animación para estadísticas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-custom {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Botón ver detalles */
+.view-details-btn {
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.view-details-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(255, 127, 0, 0.3);
+}
+
+/* Mensaje de info debajo del botón de reporte */
+small.text-muted {
+  font-size: 0.85em;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Total de ingresos destacado */
+#totalRevenue {
+  font-size: 1.3em;
+  color: var(--color-secundario);
 }
 
 /* Dispositivos móviles (max-width: 768px) */

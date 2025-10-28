@@ -152,65 +152,99 @@
       </div>
     </section>
 
-    <!-- ==========================================
-         SECCIÓN 3: GESTIONAR ÓRDENES
-         ========================================== -->
-    <section id="section-ordenes" class="admin-section">
-      <div class="section-header-admin">
-        <h1><i class="bi bi-receipt me-2"></i>Gestionar Órdenes</h1>
+<!-- ==========================================
+     SECCIÓN 3: GESTIONAR ÓRDENES (Reemplazar en admin.html)
+     ========================================== -->
+<section id="section-ordenes" class="admin-section">
+  <div class="section-header-admin">
+    <h1><i class="bi bi-receipt me-2"></i>Gestionar Órdenes</h1>
+  </div>
+
+  <div class="card-custom">
+    <!-- FILTROS DE FECHA MEJORADOS -->
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <h5 class="text-naranja mb-3"><i class="bi bi-funnel-fill me-2"></i>Filtros de Búsqueda</h5>
       </div>
-
-      <div class="card-custom">
-        <!-- FILTRO DE FECHA -->
-        <div class="mb-3">
-          <label for="dateFilter" class="form-label">Filtrar por día:</label>
-          <div class="d-inline-flex align-items-center">
-            <input type="date" id="dateFilter" class="form-control w-auto d-inline-block me-2">
-            <button id="clearFilter" class="btn btn-sm btn-naranja">Mostrar Todas</button>
-          </div>
-        </div>
-
-        <!-- GRÁFICO DE VENTAS POR DÍA -->
-        <div class="mb-4">
-          <h4 class="text-naranja">Ventas por Día</h4>
-          <div class="chart-container">
-            <canvas id="salesChart" style="max-height: 400px;"></canvas>
-          </div>
-        </div>
-
-        <!-- GRÁFICO TOP 10 PRODUCTOS -->
-        <div class="mb-4">
-          <h4 class="text-naranja">Top 10 Productos Más Vendidos</h4>
-          <div class="chart-container">
-            <canvas id="topProductsChart" style="max-height: 400px;"></canvas>
-          </div>
-        </div>
-
-        <!-- TABLA DE ÓRDENES  -->
-        <div class="table-responsive">
-          <table class="table table-hover table-bordered align-middle text-center bg-white shadow-sm table-naranja">
-            <thead>
-              <tr>
-                <th>ID Orden</th>
-                <th>Usuario</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Total (S/)</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="ordersTableBody"></tbody>
-            <tfoot>
-              <tr>
-                <td colspan="4" class="text-end fw-bold">Total Ingresos:</td>
-                <td id="totalRevenue" class="fw-bold">S/0.00</td>
-                <td></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
+      
+      <!-- FILTRO POR RANGO DE FECHAS -->
+      <div class="col-md-4">
+        <label for="startDateFilter" class="form-label">Fecha de Inicio:</label>
+        <input type="date" id="startDateFilter" class="form-control">
       </div>
-    </section>
+      
+      <div class="col-md-4">
+        <label for="endDateFilter" class="form-label">Fecha de Fin:</label>
+        <input type="date" id="endDateFilter" class="form-control">
+      </div>
+      
+      <div class="col-md-4 d-flex align-items-end gap-2">
+        <button id="applyRangeFilter" class="btn btn-naranja flex-fill">
+          <i class="bi bi-search"></i> Aplicar Filtro
+        </button>
+        <button id="clearFilter" class="btn btn-outline-secondary flex-fill">
+          <i class="bi bi-x-circle"></i> Limpiar
+        </button>
+      </div>
+    </div>
+
+    <!-- BOTÓN DE GENERAR REPORTE -->
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <button id="generateReportBtn" class="btn btn-success">
+          <i class="bi bi-file-earmark-pdf-fill me-2"></i>Generar Reporte de Ventas
+        </button>
+        <small class="text-muted d-block mt-2">
+          <i class="bi bi-info-circle me-1"></i>
+          El reporte se generará con los filtros aplicados actualmente
+        </small>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- GRÁFICO DE VENTAS POR DÍA -->
+    <div class="mb-4">
+      <h4 class="text-naranja"><i class="bi bi-graph-up me-2"></i>Ventas por Día</h4>
+      <div class="chart-container">
+        <canvas id="salesChart" style="max-height: 400px;"></canvas>
+      </div>
+    </div>
+
+    <!-- GRÁFICO TOP 10 PRODUCTOS -->
+    <div class="mb-4">
+      <h4 class="text-naranja"><i class="bi bi-trophy-fill me-2"></i>Top 10 Productos Más Vendidos</h4>
+      <div class="chart-container">
+        <canvas id="topProductsChart" style="max-height: 400px;"></canvas>
+      </div>
+    </div>
+
+    <!-- TABLA DE ÓRDENES -->
+    <div class="table-responsive">
+      <h4 class="text-naranja mb-3"><i class="bi bi-list-ul me-2"></i>Lista de Órdenes</h4>
+      <table class="table table-hover table-bordered align-middle text-center bg-white shadow-sm table-naranja">
+        <thead>
+          <tr>
+            <th>ID Orden</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Total (S/)</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTableBody"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4" class="text-end fw-bold">Total Ingresos:</td>
+            <td id="totalRevenue" class="fw-bold">S/0.00</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
   </div>
 
   <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
@@ -248,6 +282,109 @@
     </div>
   </div>
 
+    <link rel="stylesheet"
+    href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <df-messenger location="us-central1" project-id="crucial-zodiac-473802-s9"
+    agent-id="00a83e9b-4e83-4fe3-892e-a68752476da6" language-code="es" max-query-length="-1">
+    <df-messenger-chat-bubble intent="WELCOME"
+  chat-title="Veronica"
+  agent-id="7f353333-e840-4873-bf23-96a445ce0df4"
+  language-code="es"
+  chat-icon="Icon/hamburguesa-chatbot.png">
+    </df-messenger-chat-bubble>
+  </df-messenger>
+  <style>
+    df-messenger {
+      z-index: 999;
+      position: fixed;
+      /* Los estilos de posición inicial ya no son tan importantes por la animación */
+      bottom: 16px;
+      right: 16px;
+      /* Adaptación de colores cálidos para el CHAT ABIERTO */
+      --df-messenger-font-color: #333;
+      /* Texto oscuro profesional */
+      --df-messenger-font-family: Arial, sans-serif;
+      --df-messenger-chat-background: #fff8f5;
+      /* Fondo del chat muy claro/crema */
+      --df-messenger-message-user-background: #ffdbbf;
+      /* Burbuja del usuario color terracota suave */
+      --df-messenger-message-bot-background: #f7f7f7;
+      /* Burbuja del bot gris claro */
+    }
+
+    /* Estilos para la BURBUJA DE CHAT (Botón Cerrado) */
+    df-messenger-chat-bubble {
+      /* Colores cálidos y profesionales */
+      --df-messenger-chat-bubble-background: linear-gradient(135deg, #4b4844 0%, #ffffff 100%) !important;
+      /* Degradado Naranja/Dorado */
+      --df-messenger-chat-bubble-font-color: white !important;
+      border-radius: 50% !important;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      /* Sombra elegante */
+      transition: transform 0.3s ease;
+
+      /* *ANIMACIÓN DE MOVIMIENTO DINÁMICO* */
+      animation: floatOrbit 20s ease-in-out infinite alternate;
+      /* Mueve el botón lentamente */
+      /* Mantiene el botón dentro de la vista */
+      transform: translate(0, 0);
+      position: relative;
+      /* Necesario para que la animación de movimiento funcione bien */
+    }
+
+    /* Definición de la animación: Mover el botón en un área grande */
+    @keyframes floatOrbit {
+      0% {
+        transform: translate(0, 0) scale(1);
+        /* Posición inicial: Abajo-Derecha */
+        opacity: 1;
+      }
+
+      25% {
+        transform: translate(-80vw, -70vh) scale(1.05);
+        /* Se mueve hacia Arriba-Izquierda */
+        opacity: 0.95;
+      }
+
+      50% {
+        transform: translate(-10vw, -80vh) scale(1);
+        /* Se mueve hacia Arriba-Derecha */
+        opacity: 1;
+      }
+
+      75% {
+        transform: translate(-90vw, -10vh) scale(0.95);
+        /* Se mueve hacia Abajo-Izquierda */
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1);
+        /* Regresa a la posición inicial */
+        opacity: 1;
+      }
+    }
+    /* Efecto al pasar el mouse: Detiene la animación para que sea fácil hacer clic */
+    df-messenger-chat-bubble:hover {
+      transform: scale(1.1) !important;
+      /* Más grande al pasar el mouse */
+      animation: none !important;
+      /* *Importante: Detiene el movimiento al pasar el cursor* */
+      box-shadow: 0 6px 15px rgba(255, 102, 0, 0.5);
+      /* Sombra del color de la marca */
+    }
+    /* Estilos para el widget de Dialogflow Messenger */
+df-messenger {
+  --df-messenger-button-titlebar-color: var(--color-secundario); /* Rojo para la barra de título */
+  --df-messenger-button-titlebar-font-color: #ffffff; /* Texto blanco en la barra */
+  --df-messenger-chat-background-color: #f9fafb; /* Fondo gris claro para la ventana */
+  --df-messenger-font-color: #000000; /* Texto negro para mensajes */
+  --df-messenger-send-icon: var(--color-secundario); /* Icono de enviar en rojo */
+}
+  </style>
+  
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
   

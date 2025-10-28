@@ -8,6 +8,84 @@
   <title>Sistema POS - La Ruta del Sabor</title>
   <link rel="shortcut icon" href="icon/logo.png" type="image/png">
   <link rel="stylesheet" href="./css/vendedor.css">
+  <style>
+    /* Estilos adicionales para Google Pay */
+    #gpay-container {
+      margin: 20px 0;
+      text-align: center;
+      min-height: 50px;
+      display: none;
+    }
+    
+    #gpay-container.active {
+      display: block;
+    }
+    
+    .pago-tarjeta-info {
+      background: #f8f9fa;
+      border: 2px dashed #0070ba;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      text-align: center;
+    }
+    
+    .pago-tarjeta-info h6 {
+      color: #0070ba;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    .pago-tarjeta-info p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .gpay-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #666;
+      font-size: 14px;
+      padding: 20px;
+    }
+    
+    .gpay-spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #4285f4;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .pago-success {
+      background: #d4edda;
+      border: 2px solid #28a745;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      margin: 15px 0;
+    }
+    
+    .pago-success i {
+      font-size: 48px;
+      color: #28a745;
+      margin-bottom: 10px;
+    }
+    
+    .pago-success h5 {
+      color: #155724;
+      margin: 10px 0;
+    }
+  </style>
 </head>
 <body>
   <!-- SIDEBAR -->
@@ -227,9 +305,9 @@
           <div class="pago-metodo">
             <label>Método de Pago:</label>
             <select id="metodoPago" class="form-select">
-              <option value="efectivo">Efectivo</option>
-              <option value="tarjeta">Tarjeta</option>
-              <option value="yape">Yape/Plin</option>
+              <option value="efectivo">💵 Efectivo</option>
+              <option value="tarjeta">💳 Tarjeta (Google Pay)</option>
+              <option value="yape">📱 Yape/Plin</option>
             </select>
           </div>
 
@@ -238,6 +316,7 @@
             <input type="text" id="nombreCliente" class="form-control" placeholder="Cliente general">
           </div>
 
+          <!-- Sección Efectivo -->
           <div id="pagoEfectivo" class="pago-efectivo">
             <label>Monto Recibido:</label>
             <input type="number" id="montoRecibido" class="form-control" step="0.01">
@@ -246,10 +325,38 @@
               <span id="cambioMonto">S/ 0.00</span>
             </div>
           </div>
+
+          <!-- Sección Tarjeta con Google Pay -->
+          <div id="pagoTarjeta" style="display: none;">
+            <div class="pago-tarjeta-info">
+              <h6><i class="bi bi-credit-card"></i> Pago con Tarjeta</h6>
+              <p>Utiliza Google Pay para procesar tu pago de forma segura</p>
+              <p><strong>Monto: <span id="montoTarjeta">S/ 0.00</span></strong></p>
+            </div>
+            
+            <!-- Contenedor del botón de Google Pay -->
+            <div id="gpay-container"></div>
+            
+            <!-- Mensaje de éxito -->
+            <div id="pagoExitoso" style="display: none;" class="pago-success">
+              <i class="bi bi-check-circle-fill"></i>
+              <h5>¡Pago Procesado Exitosamente!</h5>
+              <p>Tu transacción ha sido completada</p>
+            </div>
+          </div>
+
+          <!-- Sección Yape/Plin -->
+          <div id="pagoYape" style="display: none;">
+            <div class="pago-tarjeta-info">
+              <h6><i class="bi bi-phone"></i> Pago con Yape/Plin</h6>
+              <p>Escanea el código QR o realiza la transferencia</p>
+              <p><strong>Monto: <span id="montoYape">S/ 0.00</span></strong></p>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success" onclick="confirmarPago()">
+          <button type="button" id="btnConfirmarVenta" class="btn btn-success" onclick="confirmarPago()">
             <i class="bi bi-check-circle"></i> Confirmar Venta
           </button>
         </div>
@@ -278,7 +385,116 @@
     </div>
   </div>
 
+    <link rel="stylesheet"
+    href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <df-messenger location="us-central1" project-id="crucial-zodiac-473802-s9"
+    agent-id="00a83e9b-4e83-4fe3-892e-a68752476da6" language-code="es" max-query-length="-1">
+    <df-messenger-chat-bubble intent="WELCOME"
+  chat-title="Veronica"
+  agent-id="7f353333-e840-4873-bf23-96a445ce0df4"
+  language-code="es"
+  chat-icon="Icon/hamburguesa-chatbot.png">
+    </df-messenger-chat-bubble>
+  </df-messenger>
+  <style>
+    df-messenger {
+      z-index: 999;
+      position: fixed;
+      /* Los estilos de posición inicial ya no son tan importantes por la animación */
+      bottom: 16px;
+      right: 16px;
+      /* Adaptación de colores cálidos para el CHAT ABIERTO */
+      --df-messenger-font-color: #333;
+      /* Texto oscuro profesional */
+      --df-messenger-font-family: Arial, sans-serif;
+      --df-messenger-chat-background: #fff8f5;
+      /* Fondo del chat muy claro/crema */
+      --df-messenger-message-user-background: #ffdbbf;
+      /* Burbuja del usuario color terracota suave */
+      --df-messenger-message-bot-background: #f7f7f7;
+      /* Burbuja del bot gris claro */
+    }
+
+    /* Estilos para la BURBUJA DE CHAT (Botón Cerrado) */
+    df-messenger-chat-bubble {
+      /* Colores cálidos y profesionales */
+      --df-messenger-chat-bubble-background: linear-gradient(135deg, #4b4844 0%, #ffffff 100%) !important;
+      /* Degradado Naranja/Dorado */
+      --df-messenger-chat-bubble-font-color: white !important;
+      border-radius: 50% !important;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      /* Sombra elegante */
+      transition: transform 0.3s ease;
+
+      /* *ANIMACIÓN DE MOVIMIENTO DINÁMICO* */
+      animation: floatOrbit 20s ease-in-out infinite alternate;
+      /* Mueve el botón lentamente */
+      /* Mantiene el botón dentro de la vista */
+      transform: translate(0, 0);
+      position: relative;
+      /* Necesario para que la animación de movimiento funcione bien */
+    }
+
+    /* Definición de la animación: Mover el botón en un área grande */
+    @keyframes floatOrbit {
+      0% {
+        transform: translate(0, 0) scale(1);
+        /* Posición inicial: Abajo-Derecha */
+        opacity: 1;
+      }
+
+      25% {
+        transform: translate(-80vw, -70vh) scale(1.05);
+        /* Se mueve hacia Arriba-Izquierda */
+        opacity: 0.95;
+      }
+
+      50% {
+        transform: translate(-10vw, -80vh) scale(1);
+        /* Se mueve hacia Arriba-Derecha */
+        opacity: 1;
+      }
+
+      75% {
+        transform: translate(-90vw, -10vh) scale(0.95);
+        /* Se mueve hacia Abajo-Izquierda */
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1);
+        /* Regresa a la posición inicial */
+        opacity: 1;
+      }
+    }
+    /* Efecto al pasar el mouse: Detiene la animación para que sea fácil hacer clic */
+    df-messenger-chat-bubble:hover {
+      transform: scale(1.1) !important;
+      /* Más grande al pasar el mouse */
+      animation: none !important;
+      /* *Importante: Detiene el movimiento al pasar el cursor* */
+      box-shadow: 0 6px 15px rgba(255, 102, 0, 0.5);
+      /* Sombra del color de la marca */
+    }
+    /* Estilos para el widget de Dialogflow Messenger */
+df-messenger {
+  --df-messenger-button-titlebar-color: var(--color-secundario); /* Rojo para la barra de título */
+  --df-messenger-button-titlebar-font-color: #ffffff; /* Texto blanco en la barra */
+  --df-messenger-chat-background-color: #f9fafb; /* Fondo gris claro para la ventana */
+  --df-messenger-font-color: #000000; /* Texto negro para mensajes */
+  --df-messenger-send-icon: var(--color-secundario); /* Icono de enviar en rojo */
+}
+  </style>
+  
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Google Pay SDK -->
+  <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
+  
+  <!-- Script del vendedor -->
   <script src="js/vendedor.js"></script>
 </body>
 </html>

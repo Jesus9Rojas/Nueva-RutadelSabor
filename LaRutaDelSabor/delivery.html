@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/delivery.css">
+  <title>Delivery - La Ruta del Sabor</title>
+  <link rel="shortcut icon" href="icon/logo.png" type="image/png">
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <div class="delivery-sidebar" id="deliverySidebar">
+    <div class="sidebar-header">
+      <img src="Icon/logo.png" alt="Logo" class="sidebar-logo">
+      <h3>Panel Delivery</h3>
+      <p class="user-name" id="deliveryUserName">Repartidor</p>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <a href="#" class="menu-item active" data-target="pendientes">
+        <i class="bi bi-clock-history"></i>
+        <span>Pedidos Pendientes</span>
+        <span class="badge-count" id="badgePendientes">0</span>
+      </a>
+      <a href="#" class="menu-item" data-target="en-camino">
+        <i class="bi bi-truck"></i>
+        <span>En Camino</span>
+        <span class="badge-count" id="badgeEnCamino">0</span>
+      </a>
+      <a href="#" class="menu-item" data-target="entregados">
+        <i class="bi bi-check-circle"></i>
+        <span>Entregados Hoy</span>
+        <span class="badge-count" id="badgeEntregados">0</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="stats-box">
+        <p class="stats-label">Entregas Hoy</p>
+        <p class="stats-value" id="totalEntregasHoy">0</p>
+      </div>
+      <a href="#" onclick="cerrarSesion(event)" class="btn-salir">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Cerrar Sesión</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- BOTÓN TOGGLE MÓVIL -->
+  <button class="sidebar-toggle-btn" id="sidebarToggle">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="delivery-main-content">
+    
+    <!-- SECCIÓN: PEDIDOS PENDIENTES -->
+    <section id="section-pendientes" class="delivery-section active">
+      <div class="section-header-delivery">
+        <h1><i class="bi bi-clock-history me-2"></i>Pedidos Pendientes</h1>
+        <button class="btn-refresh" onclick="cargarPedidos()">
+          <i class="bi bi-arrow-clockwise"></i> Actualizar
+        </button>
+      </div>
+
+      <div class="alert alert-info">
+        <i class="bi bi-info-circle me-2"></i>
+        Estos son los pedidos que están listos para ser entregados. Toma uno para comenzar la entrega.
+      </div>
+
+      <div id="listaPendientes" class="pedidos-grid">
+        <!-- Los pedidos se cargarán aquí dinámicamente -->
+      </div>
+    </section>
+
+    <!-- SECCIÓN: EN CAMINO -->
+    <section id="section-en-camino" class="delivery-section">
+      <div class="section-header-delivery">
+        <h1><i class="bi bi-truck me-2"></i>Pedidos En Camino</h1>
+        <button class="btn-refresh" onclick="cargarPedidos()">
+          <i class="bi bi-arrow-clockwise"></i> Actualizar
+        </button>
+      </div>
+
+      <div class="alert alert-warning">
+        <i class="bi bi-exclamation-triangle me-2"></i>
+        Pedidos que estás entregando actualmente. Marca como entregado cuando completes la entrega.
+      </div>
+
+      <div id="listaEnCamino" class="pedidos-grid">
+        <!-- Los pedidos se cargarán aquí dinámicamente -->
+      </div>
+    </section>
+
+    <!-- SECCIÓN: ENTREGADOS -->
+    <section id="section-entregados" class="delivery-section">
+      <div class="section-header-delivery">
+        <h1><i class="bi bi-check-circle me-2"></i>Pedidos Entregados Hoy</h1>
+        <button class="btn-refresh" onclick="cargarPedidos()">
+          <i class="bi bi-arrow-clockwise"></i> Actualizar
+        </button>
+      </div>
+
+      <div class="alert alert-success">
+        <i class="bi bi-check-circle me-2"></i>
+        Historial de pedidos entregados el día de hoy.
+      </div>
+
+      <div id="listaEntregados" class="pedidos-grid">
+        <!-- Los pedidos se cargarán aquí dinámicamente -->
+      </div>
+    </section>
+  </div>
+
+  <!-- MODAL DETALLES DEL PEDIDO -->
+  <div class="modal fade" id="detallesPedidoModal" tabindex="-1" aria-labelledby="detallesPedidoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detallesPedidoModalLabel">
+            <i class="bi bi-receipt me-2"></i>Detalles del Pedido
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="detallesPedidoBody">
+          <!-- Contenido dinámico -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <link rel="stylesheet"
+    href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <df-messenger location="us-central1" project-id="crucial-zodiac-473802-s9"
+    agent-id="00a83e9b-4e83-4fe3-892e-a68752476da6" language-code="es" max-query-length="-1">
+    <df-messenger-chat-bubble intent="WELCOME"
+  chat-title="Veronica"
+  agent-id="7f353333-e840-4873-bf23-96a445ce0df4"
+  language-code="es"
+  chat-icon="Icon/hamburguesa-chatbot.png">
+    </df-messenger-chat-bubble>
+  </df-messenger>
+  <style>
+    df-messenger {
+      z-index: 999;
+      position: fixed;
+      /* Los estilos de posición inicial ya no son tan importantes por la animación */
+      bottom: 16px;
+      right: 16px;
+      /* Adaptación de colores cálidos para el CHAT ABIERTO */
+      --df-messenger-font-color: #333;
+      /* Texto oscuro profesional */
+      --df-messenger-font-family: Arial, sans-serif;
+      --df-messenger-chat-background: #fff8f5;
+      /* Fondo del chat muy claro/crema */
+      --df-messenger-message-user-background: #ffdbbf;
+      /* Burbuja del usuario color terracota suave */
+      --df-messenger-message-bot-background: #f7f7f7;
+      /* Burbuja del bot gris claro */
+    }
+
+    /* Estilos para la BURBUJA DE CHAT (Botón Cerrado) */
+    df-messenger-chat-bubble {
+      /* Colores cálidos y profesionales */
+      --df-messenger-chat-bubble-background: linear-gradient(135deg, #4b4844 0%, #ffffff 100%) !important;
+      /* Degradado Naranja/Dorado */
+      --df-messenger-chat-bubble-font-color: white !important;
+      border-radius: 50% !important;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      /* Sombra elegante */
+      transition: transform 0.3s ease;
+
+      /* *ANIMACIÓN DE MOVIMIENTO DINÁMICO* */
+      animation: floatOrbit 20s ease-in-out infinite alternate;
+      /* Mueve el botón lentamente */
+      /* Mantiene el botón dentro de la vista */
+      transform: translate(0, 0);
+      position: relative;
+      /* Necesario para que la animación de movimiento funcione bien */
+    }
+
+    /* Definición de la animación: Mover el botón en un área grande */
+    @keyframes floatOrbit {
+      0% {
+        transform: translate(0, 0) scale(1);
+        /* Posición inicial: Abajo-Derecha */
+        opacity: 1;
+      }
+
+      25% {
+        transform: translate(-80vw, -70vh) scale(1.05);
+        /* Se mueve hacia Arriba-Izquierda */
+        opacity: 0.95;
+      }
+
+      50% {
+        transform: translate(-10vw, -80vh) scale(1);
+        /* Se mueve hacia Arriba-Derecha */
+        opacity: 1;
+      }
+
+      75% {
+        transform: translate(-90vw, -10vh) scale(0.95);
+        /* Se mueve hacia Abajo-Izquierda */
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1);
+        /* Regresa a la posición inicial */
+        opacity: 1;
+      }
+    }
+    /* Efecto al pasar el mouse: Detiene la animación para que sea fácil hacer clic */
+    df-messenger-chat-bubble:hover {
+      transform: scale(1.1) !important;
+      /* Más grande al pasar el mouse */
+      animation: none !important;
+      /* *Importante: Detiene el movimiento al pasar el cursor* */
+      box-shadow: 0 6px 15px rgba(255, 102, 0, 0.5);
+      /* Sombra del color de la marca */
+    }
+    /* Estilos para el widget de Dialogflow Messenger */
+df-messenger {
+  --df-messenger-button-titlebar-color: var(--color-secundario); /* Rojo para la barra de título */
+  --df-messenger-button-titlebar-font-color: #ffffff; /* Texto blanco en la barra */
+  --df-messenger-chat-background-color: #f9fafb; /* Fondo gris claro para la ventana */
+  --df-messenger-font-color: #000000; /* Texto negro para mensajes */
+  --df-messenger-send-icon: var(--color-secundario); /* Icono de enviar en rojo */
+}
+  </style>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  <script src="js/delivery.js"></script>
+</body>
+</html>

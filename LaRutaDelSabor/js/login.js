@@ -1,4 +1,4 @@
-// login.js - Con cuenta específica de vendedor
+// login.js - Con cuenta específica de vendedor y delivery
 
 document.addEventListener("DOMContentLoaded", () => {
   const loginPage = document.querySelector(".login-page");
@@ -71,6 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // Si es el VENDEDOR (cuenta específica)
         else if (user.email === 'vendedor1@vendedorRS.com') {
           window.location.href = "vendedor.html";
+        }
+        // Si es el DELIVERY (cuenta específica)
+        else if (user.email === 'delivery1@vendedorRS.com') {
+          window.location.href = "delivery.html";
         }
         // Cualquier otro usuario es CLIENTE
         else {

@@ -7,69 +7,211 @@ document.addEventListener('DOMContentLoaded', async () => {
     let categories = [];
     let products = [];
 
-    // Inicializa el menú: carga categorías y productos
-    async function initMenu() {
-        try {
-            const catResponse = await fetch(`${API_URL}/categories`);
-            const catData = await catResponse.json();
-            if (catData.success) {
-                categories = catData.data;
-                renderCategoriasSidebar(); // Renderiza las categorías en la sidebar
-                inicializarMenuResponsive(); // Inicializar funcionalidad responsive
-            } else {
-                throw new Error('Error al cargar categorías');
-            }
+    // ============================================
+    // SISTEMA DE CACHÉ CON EXPIRACIÓN
+    // ============================================
+    const CACHE_EXPIRATION = 5 * 60 * 1000; // 5 minutos
 
-            await renderProductos('todo', document.querySelector("#categorias-list button.active"));
+    function getCachedData(key) {
+        try {
+            const cached = localStorage.getItem(key);
+            if (!cached) return null;
+            
+            const { data, timestamp } = JSON.parse(cached);
+            const now = Date.now();
+            
+            // Verificar si el caché expiró
+            if (now - timestamp > CACHE_EXPIRATION) {
+                localStorage.removeItem(key);
+                return null;
+            }
+            
+            return data;
         } catch (error) {
-            console.log("Error al cargar el menú:", error.message);
-            categoriasList.innerHTML = "<p>Error al cargar el menú.</p>";
+            console.error('Error al leer caché:', error);
+            return null;
         }
     }
 
-    // Renderiza los productos según la categoría seleccionada
+    function setCachedData(key, data) {
+        try {
+            const cacheObject = {
+                data: data,
+                timestamp: Date.now()
+            };
+            localStorage.setItem(key, JSON.stringify(cacheObject));
+        } catch (error) {
+            console.error('Error al guardar caché:', error);
+        }
+    }
+
+    // ============================================
+    // LOADER VISUAL
+    // ============================================
+    function showLoader(container, message = "Cargando...") {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 4rem; width: 100%; grid-column: 1/-1;">
+                <div style="display: inline-block; width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #ff7f00; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                <style>
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                </style>
+                <h4 style="margin-top: 1rem; color: #333;">${message}</h4>
+            </div>
+        `;
+    }
+
+    // ============================================
+    // CARGA PARALELA Y OPTIMIZADA
+    // ============================================
+    async function initMenu() {
+        try {
+            // Mostrar loader mientras carga
+            showLoader(productosContainer, "Cargando menú...");
+            
+            // Intentar cargar desde caché primero
+            const cachedCategories = getCachedData('menu_categories');
+            const cachedProducts = getCachedData('menu_products_all');
+            
+            // Si hay datos en caché, mostrarlos inmediatamente
+            if (cachedCategories && cachedProducts) {
+                categories = cachedCategories;
+                products = cachedProducts;
+                
+                // Renderizar inmediatamente desde caché
+                renderCategoriasSidebar();
+                renderProductosFromCache(products);
+                inicializarMenuResponsive();
+                
+                // Actualizar en segundo plano
+                updateDataInBackground();
+                return;
+            }
+            
+            // Si no hay caché, cargar en paralelo
+            const [catResponse, prodResponse] = await Promise.all([
+                fetch(`${API_URL}/categories`),
+                fetch(`${API_URL}/products`)
+            ]);
+
+            const catData = await catResponse.json();
+            const prodData = await prodResponse.json();
+
+            if (catData.success && prodData.success) {
+                categories = catData.data;
+                products = prodData.data;
+                
+                // Guardar en caché
+                setCachedData('menu_categories', categories);
+                setCachedData('menu_products_all', products);
+                
+                // Renderizar
+                renderCategoriasSidebar();
+                renderProductosFromCache(products);
+                inicializarMenuResponsive();
+            } else {
+                throw new Error('Error al cargar datos');
+            }
+        } catch (error) {
+            console.error("Error al cargar el menú:", error);
+            productosContainer.innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: #d32f2f; grid-column: 1/-1;">
+                    <h4>⚠️ Error al cargar el menú</h4>
+                    <p>Por favor, recarga la página</p>
+                    <button onclick="location.reload()" style="margin-top: 1rem; padding: 1rem 2rem; background: #ff7f00; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        Recargar
+                    </button>
+                </div>
+            `;
+        }
+    }
+
+    // Actualizar datos en segundo plano
+    async function updateDataInBackground() {
+        try {
+            const [catResponse, prodResponse] = await Promise.all([
+                fetch(`${API_URL}/categories`),
+                fetch(`${API_URL}/products`)
+            ]);
+
+            const catData = await catResponse.json();
+            const prodData = await prodResponse.json();
+
+            if (catData.success && prodData.success) {
+                // Actualizar caché silenciosamente
+                setCachedData('menu_categories', catData.data);
+                setCachedData('menu_products_all', prodData.data);
+                
+                categories = catData.data;
+                products = prodData.data;
+            }
+        } catch (error) {
+            console.log('Error al actualizar en segundo plano:', error);
+        }
+    }
+
+    // Renderizar productos desde caché (sin hacer fetch)
+    function renderProductosFromCache(productsToShow) {
+        productosContainer.innerHTML = "";
+        
+        if (productsToShow.length === 0) {
+            productosContainer.innerHTML = `
+                <div style="text-align: center; padding: 2rem; grid-column: 1/-1;">
+                    <p>No hay productos disponibles</p>
+                </div>
+            `;
+            return;
+        }
+
+        productsToShow.forEach(producto => {
+            const card = document.createElement("div");
+            card.className = "producto galeria-item";
+            card.innerHTML = `
+                <img src="${producto.imagen}" 
+                     alt="${producto.nombre}" 
+                     loading="lazy"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/FFFFFF?text=${encodeURIComponent(producto.nombre)}';">
+                <h3>${producto.nombre}</h3>
+                <p>${producto.descripcion}</p>
+                <p class="precio">S/ ${producto.precio.toFixed(2)}</p>
+            `;
+            card.addEventListener("click", () => showProductModal(producto));
+            productosContainer.appendChild(card);
+        });
+    }
+
+    // Renderiza los productos según la categoría seleccionada (OPTIMIZADO)
     async function renderProductos(categoryId, btn) {
         const allBtns = document.querySelectorAll("#categorias-list button");
         allBtns.forEach(b => b.classList.remove("active"));
         if (btn) btn.classList.add("active");
 
-        productosContainer.innerHTML = "<h4>Cargando...</h4>";
-
-        try {
-            let url = `${API_URL}/products`;
-            if (categoryId !== 'todo') {
-                url = `${API_URL}/products?categoria=${categoryId}`;
+        // Filtrar desde datos ya cargados en lugar de hacer fetch
+        let productsToShow;
+        
+        if (categoryId === 'todo') {
+            productsToShow = products;
+        } else {
+            // Filtrar por múltiples criterios para asegurar compatibilidad
+            productsToShow = products.filter(p => {
+                // Verificar si el producto tiene el campo categoria como ID, nombre o _id
+                return p.categoria === categoryId || 
+                       p.categoria?._id === categoryId || 
+                       p.categoriaId === categoryId ||
+                       p.categoria_id === categoryId;
+            });
+            
+            // Debug: mostrar en consola si no hay productos
+            if (productsToShow.length === 0) {
+                console.log('No se encontraron productos para categoryId:', categoryId);
+                console.log('Productos disponibles:', products);
+                console.log('Estructura de categoria en productos:', products[0]?.categoria);
             }
-            const response = await fetch(url);
-            const prodData = await response.json();
-
-            if (prodData.success) {
-                products = prodData.data;
-                productosContainer.innerHTML = "";
-                if (products.length === 0) {
-                    productosContainer.innerHTML = "<p>No hay productos en esta categoría.</p>";
-                }
-                products.forEach(producto => {
-                    const card = document.createElement("div");
-                    card.className = "producto galeria-item";
-                    card.innerHTML = `
-                        <img src="${producto.imagen}" alt="${producto.nombre}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/FFFFFF?text=${producto.nombre}';">
-                        <h3>${producto.nombre}</h3>
-                        <p>${producto.descripcion}</p>
-                        <p class="precio">S/ ${producto.precio.toFixed(2)}</p>
-                    `;
-                    card.addEventListener("click", () => showProductModal(producto));
-                    productosContainer.appendChild(card);
-                });
-            } else {
-                productosContainer.innerHTML = "<p>Error al cargar productos.</p>";
-            }
-        } catch (error) {
-            console.log('Error al obtener productos:', error.message);
-            productosContainer.innerHTML = "<p>Error de conexión al cargar productos.</p>";
         }
 
-        // Cerrar menú móvil después de seleccionar categoría
+        renderProductosFromCache(productsToShow);
         cerrarMenuMovil();
     }
 
@@ -145,65 +287,65 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Renderiza los botones de autenticación según el estado del usuario
     function renderAuthButtons() {
-    const authButtons = document.getElementById('botones-autenticacion');
-    const user = JSON.parse(localStorage.getItem('user'));
-    const token = localStorage.getItem('token');
-    
-    authButtons.innerHTML = '';
+        const authButtons = document.getElementById('botones-autenticacion');
+        const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('token');
+        
+        authButtons.innerHTML = '';
 
-    // ADMINISTRADOR - Cuenta específica test@test.com
-    if (token && user && user.email === 'test@test.com') {
-        authButtons.innerHTML = `
-            <div class="registro">
-                <a href="admin.html" class="admin-btn">
-                    <i class="bi bi-basket-fill"></i> Registrar Productos
-                </a>
-            </div>
-            <div class="registro">
-                <a href="#" onclick="logout()" class="admin-btn">
-                    <i class="bi bi-box-arrow-right"></i> Salir Modo Admin
-                </a>
-            </div>
-        `;
-    } 
-    // VENDEDOR - Cuenta específica vendedor1@vendedorRS.com
-    else if (token && user && user.email === 'vendedor1@vendedorRS.com') {
-        authButtons.innerHTML = `
-            <div class="registro">
-                <a href="vendedor.html" class="admin-btn">
-                    <i class="bi bi-cart-plus-fill"></i> Sistema POS
-                </a>
-            </div>
-            <div class="registro">
-                <a href="#" onclick="logout()" class="admin-btn">
-                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
-                </a>
-            </div>
-        `;
+        // ADMINISTRADOR - Cuenta específica test@test.com
+        if (token && user && user.email === 'test@test.com') {
+            authButtons.innerHTML = `
+                <div class="registro">
+                    <a href="admin.html" class="admin-btn">
+                        <i class="bi bi-basket-fill"></i> Registrar Productos
+                    </a>
+                </div>
+                <div class="registro">
+                    <a href="#" onclick="logout()" class="admin-btn">
+                        <i class="bi bi-box-arrow-right"></i> Salir Modo Admin
+                    </a>
+                </div>
+            `;
+        } 
+        // VENDEDOR - Cuenta específica vendedor1@vendedorRS.com
+        else if (token && user && user.email === 'vendedor1@vendedorRS.com') {
+            authButtons.innerHTML = `
+                <div class="registro">
+                    <a href="vendedor.html" class="admin-btn">
+                        <i class="bi bi-cart-plus-fill"></i> Sistema POS
+                    </a>
+                </div>
+                <div class="registro">
+                    <a href="#" onclick="logout()" class="admin-btn">
+                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                    </a>
+                </div>
+            `;
+        }
+        // CLIENTE AUTENTICADO (cualquier otro usuario)
+        else if (token && user) {
+            authButtons.innerHTML = `
+                <div class="registro">
+                    <a href="#" onclick="logout()"><img src="Icon/cerrar-con-llave.png" alt="Cerrar Sesión"></a>
+                </div>
+                <div class="carrito">
+                    <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
+                </div>
+            `;
+        } 
+        // USUARIO NO AUTENTICADO
+        else {
+            authButtons.innerHTML = `
+                <div class="registro">
+                    <a href="login.html"><img src="Icon/iniciar_sesion.png" alt="Iniciar Sesión"></a>
+                </div>
+                <div class="carrito">
+                    <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
+                </div>
+            `;
+        }
     }
-    // CLIENTE AUTENTICADO (cualquier otro usuario)
-    else if (token && user) {
-        authButtons.innerHTML = `
-            <div class="registro">
-                <a href="#" onclick="logout()"><img src="Icon/cerrar-con-llave.png" alt="Cerrar Sesión"></a>
-            </div>
-            <div class="carrito">
-                <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
-            </div>
-        `;
-    } 
-    // USUARIO NO AUTENTICADO
-    else {
-        authButtons.innerHTML = `
-            <div class="registro">
-                <a href="login.html"><img src="Icon/iniciar_sesion.png" alt="Iniciar Sesión"></a>
-            </div>
-            <div class="carrito">
-                <a href="carrito.html"><img src="Icon/carrito-de-compras.png" alt="Carrito"></a>
-            </div>
-        `;
-    }
-}
 
     // ============================================
     // FUNCIONALIDAD RESPONSIVE PARA MENÚ MÓVIL
@@ -213,14 +355,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         const sidebar = document.getElementById('categorias-sidebar');
         
         if (menuToggle && sidebar) {
-            // Toggle del menú al hacer click en el botón
             menuToggle.addEventListener('click', function(e) {
-                e.stopPropagation(); // Evita que se propague el evento
+                e.stopPropagation();
                 sidebar.classList.toggle('active');
                 menuToggle.classList.toggle('active');
             });
 
-            // Cerrar menú al hacer click fuera de él
             document.addEventListener('click', function(event) {
                 if (window.innerWidth <= 768) {
                     const isClickInsideSidebar = sidebar.contains(event.target);
@@ -234,7 +374,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Función auxiliar para cerrar el menú móvil
     function cerrarMenuMovil() {
         if (window.innerWidth <= 768) {
             const sidebar = document.getElementById('categorias-sidebar');
@@ -245,7 +384,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Re-inicializar al cambiar el tamaño de ventana
     let resizeMenuTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeMenuTimer);
@@ -253,7 +391,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             const sidebar = document.getElementById('categorias-sidebar');
             const menuToggle = document.getElementById('menu-toggle');
             
-            // Remover clase active si pasamos a escritorio
             if (window.innerWidth > 768) {
                 if (sidebar) sidebar.classList.remove('active');
                 if (menuToggle) menuToggle.classList.remove('active');
@@ -270,6 +407,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    // Limpiar caché al cerrar sesión
+    localStorage.removeItem('menu_categories');
+    localStorage.removeItem('menu_products_all');
     window.location.href = 'index.html';
 }
 
@@ -277,7 +417,6 @@ function logout() {
 document.addEventListener("DOMContentLoaded", () => {
     const socialLinks = document.querySelectorAll(".social-link");
 
-    // Efecto de explosión en las redes sociales
     socialLinks.forEach(link => {
         link.addEventListener("click", function (e) {
             e.preventDefault();

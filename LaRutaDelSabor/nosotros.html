@@ -150,7 +150,109 @@ document.addEventListener("DOMContentLoaded", () => {
             </ul>
         </aside>
         </div>
+  <link rel="stylesheet"
+    href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <df-messenger location="us-central1" project-id="crucial-zodiac-473802-s9"
+    agent-id="00a83e9b-4e83-4fe3-892e-a68752476da6" language-code="es" max-query-length="-1">
+    <df-messenger-chat-bubble intent="WELCOME"
+  chat-title="Veronica"
+  agent-id="7f353333-e840-4873-bf23-96a445ce0df4"
+  language-code="es"
+  chat-icon="Icon/hamburguesa-chatbot.png">
+    </df-messenger-chat-bubble>
+  </df-messenger>
+  <style>
+    df-messenger {
+      z-index: 999;
+      position: fixed;
+      /* Los estilos de posición inicial ya no son tan importantes por la animación */
+      bottom: 16px;
+      right: 16px;
+      /* Adaptación de colores cálidos para el CHAT ABIERTO */
+      --df-messenger-font-color: #333;
+      /* Texto oscuro profesional */
+      --df-messenger-font-family: Arial, sans-serif;
+      --df-messenger-chat-background: #fff8f5;
+      /* Fondo del chat muy claro/crema */
+      --df-messenger-message-user-background: #ffdbbf;
+      /* Burbuja del usuario color terracota suave */
+      --df-messenger-message-bot-background: #f7f7f7;
+      /* Burbuja del bot gris claro */
+    }
 
+    /* Estilos para la BURBUJA DE CHAT (Botón Cerrado) */
+    df-messenger-chat-bubble {
+      /* Colores cálidos y profesionales */
+      --df-messenger-chat-bubble-background: linear-gradient(135deg, #4b4844 0%, #ffffff 100%) !important;
+      /* Degradado Naranja/Dorado */
+      --df-messenger-chat-bubble-font-color: white !important;
+      border-radius: 50% !important;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      /* Sombra elegante */
+      transition: transform 0.3s ease;
+
+      /* *ANIMACIÓN DE MOVIMIENTO DINÁMICO* */
+      animation: floatOrbit 20s ease-in-out infinite alternate;
+      /* Mueve el botón lentamente */
+      /* Mantiene el botón dentro de la vista */
+      transform: translate(0, 0);
+      position: relative;
+      /* Necesario para que la animación de movimiento funcione bien */
+    }
+
+    /* Definición de la animación: Mover el botón en un área grande */
+    @keyframes floatOrbit {
+      0% {
+        transform: translate(0, 0) scale(1);
+        /* Posición inicial: Abajo-Derecha */
+        opacity: 1;
+      }
+
+      25% {
+        transform: translate(-80vw, -70vh) scale(1.05);
+        /* Se mueve hacia Arriba-Izquierda */
+        opacity: 0.95;
+      }
+
+      50% {
+        transform: translate(-10vw, -80vh) scale(1);
+        /* Se mueve hacia Arriba-Derecha */
+        opacity: 1;
+      }
+
+      75% {
+        transform: translate(-90vw, -10vh) scale(0.95);
+        /* Se mueve hacia Abajo-Izquierda */
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1);
+        /* Regresa a la posición inicial */
+        opacity: 1;
+      }
+    }
+    /* Efecto al pasar el mouse: Detiene la animación para que sea fácil hacer clic */
+    df-messenger-chat-bubble:hover {
+      transform: scale(1.1) !important;
+      /* Más grande al pasar el mouse */
+      animation: none !important;
+      /* *Importante: Detiene el movimiento al pasar el cursor* */
+      box-shadow: 0 6px 15px rgba(255, 102, 0, 0.5);
+      /* Sombra del color de la marca */
+    }
+    /* Estilos para el widget de Dialogflow Messenger */
+df-messenger {
+  --df-messenger-button-titlebar-color: var(--color-secundario); /* Rojo para la barra de título */
+  --df-messenger-button-titlebar-font-color: #ffffff; /* Texto blanco en la barra */
+  --df-messenger-chat-background-color: #f9fafb; /* Fondo gris claro para la ventana */
+  --df-messenger-font-color: #000000; /* Texto negro para mensajes */
+  --df-messenger-send-icon: var(--color-secundario); /* Icono de enviar en rojo */
+}
+  </style>
+  
         <footer>
      <div class="footer-redes">
         <a href="https://facebook.com" target="_blank" class="social-link">
